@@ -1,21 +1,30 @@
-## Exercises: Hands-on Beginner to Solidity
+# Exercises: Hands-on Beginner to Solidity
 
 In this section, I will present some hands-on coding exercises for coding smart contracts in Solidity. I will also explain some of the basic concepts of the Solidity language before each exercise.
 
-### 1. Starting out
+## 1. Starting out
 
-#### 1.1. What is Solidity
+### 1.1. What is Solidity
 
 Solidity is high-level language to code smart contracts in the Ehtereum platform. Solidity is a statically typed language inspired by C++, Javascript, and Python. It supports multiple inheritance, user defined types (e.g., structs, enums), and it even has some "syntactic suggar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in depth language description.
 
 
-#### 1.2. Remix
+### 1.2. Remix
 
-[Remix](https://remix.ethereum.org/) is an IDE for Solidity. It can run directly on your web-browser without the need to download or install anything. Remix uses the latest Javascript compiler for Solidity.
+[Remix](https://remix.ethereum.org/) is an IDE for Solidity. It can run directly on your web-browser without the need to download or install anything. Remix uses the latest Javascript compiler for Solidity. One of the best features of Solidity is that it runs on a simulator enviroment by default. Therefore, we can play with contract code without having to connect to the Ethereum blockchain (which we need to pay for most of its operations).
 
-All the exercises in this section use Remix. Therefore, you should open and get acquainted with it. 
+All the exercises in this section use Remix. Therefore, you should open and get acquainted with it. The figure bellow shows the Remix interface.
 
-#### 1.3. Primitive Types
+![Remix Interface](/images/remix.png)
+
+At the left part of the screen, we can see "browser" and "config". Browser will show all contracts that you have created in Remix. Config is used for special setup and I will not use that. At the very top on the left part, we can see some small icons. The most important one (and the only we are going to need) is the first icon that looks like a plus sign. That icon creates a new contract.
+
+The middle part of the screen is the code editor. The lower part of the middle screen is the transactions log. Every operation on the blockchain creates a transaction. Remix will show on this log every transaction that it created. 
+
+Now, I recommend paying special attention to the right part, here is where most of our interactions with the smart contracts will happen. There are 6 tabs on the right part, but for this tutorial we only need the first two: "compile" and "run". Compile is useful to verify the errors and warnings on your code, use this tab if you are having a hard time fixing your code. The Run tab is where the "magic" is.
+
+
+### 1.3. Primitive Types
 
 * __bool__ - 1 byte boolean.
 * __int__ - 32 bytes integer that accepts positive and negative values.
@@ -35,7 +44,7 @@ All the exercises in this section use Remix. Therefore, you should open and get 
 
 The reason for many types to have the option to customize its storage is "cost". Storage and execution in the Ethereum blockchain have transactional costs attached to them. Therefore, optimizing your contract to use less storage when possible will reduce its overall costs for you and its users.
 
-#### 1.4. My First Contract
+### 1.4. My First Contract
 
 Lets start by creating our first smart contract in Solidity. Remember to use [Remix](https://remix.ethereum.org/) to deploy the contract and execute its functions.
 
@@ -66,7 +75,7 @@ Comments in Solidity are like C++ and Javascript (and many others). However, if 
 
 Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter).
 
-
+![My First Contract on Remix](/images/remix-first-contract.png)
 
 
 
