@@ -13,7 +13,7 @@ In this page you can find the materials for the tutorial including slides, lesso
 ### Tutorial
 
 - Slides
-- [Exercise: Hands-On Begginers to Solidity](handson.html)
+- [Exercise: Hands-On Begginers to Solidity](handson.md)
 - Exercise: Solidity Coding Patterns
 - Exercise: Tools for Smart Contract Analysis
 - About me.
