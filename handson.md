@@ -15,6 +15,8 @@ Solidity is high-level language to code smart contracts in the Ehtereum platform
 
 All the exercises in this section use Remix. Therefore, you should open and get acquainted with it. 
 
+![Remix Interface](/images/remix.png)
+
 #### 1.3. Primitive Types
 
 * __bool__ - 1 byte boolean.
@@ -66,7 +68,7 @@ Comments in Solidity are like C++ and Javascript (and many others). However, if 
 
 Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter).
 
-
+![My First Contract on Remix](/images/remix-first-contract.png)
 
 
 
