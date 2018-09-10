@@ -45,11 +45,11 @@ Understanding the Remix IDE is important to execute the tutorial examples. Pleas
 * __byte__ - 1 byte.
   * __bytes1 / bytes2 / ... bytes32__ - syntactic suggar for a byte array (up to 32 bytes).
 * __fixed__ - fixed point numbers (i.e., real numbers). The storage for the integer and fractional part is flexible, and we can specify its place. Fixed is actually an alias for fixed128x18 (see bellow).
-  * __fixed0x8 / fixed0x16 / ... fixed0x256 / ... fixed8x8 ...___ - fixed point number where the first number specifies the number of bits used for the integer part (i.e., before the decimal separator), and the other number specifies the bits for the fractional part. The numbers used must be in increments of 8 (zero is allowed). Moreover, the total amount of bits from both parts must be lower or equal than 256 bits. 
+  * __fixed0x8 / fixed0x16 / ... fixed0x256 / ... fixed8x8 ...__ - fixed point number where the first number specifies the number of bits used for the integer part (i.e., before the decimal separator), and the other number specifies the bits for the fractional part. The numbers used must be in increments of 8 (zero is allowed). Moreover, the total amount of bits from both parts must be lower or equal than 256 bits. 
   * __CAUTION:__ fixed numbers are not fully supported in this version of Solidity, avoid using them.
 * __ufixed__ - unsigned fixed point number. Besides not allowing negative values, it has the same characteristics as fixed.
-  * __ufixed0x8 / ufixed 0x16 / ... ufixed0x256 / ...ufixed8x8 ...___ - it is also possible to customize the storage of ufixed's integer and fractional parts. Same restrictions as fixed applies here as well.
-  * __CAUTION:___ fixed numbers (even the unsigned version) are not fully supported in this version of Solidity, avoid using them.
+  * __ufixed0x8 / ufixed 0x16 / ... ufixed0x256 / ...ufixed8x8 ...__ - it is also possible to customize the storage of ufixed's integer and fractional parts. Same restrictions as fixed applies here as well.
+  * __CAUTION:__ fixed numbers (even the unsigned version) are not fully supported in this version of Solidity, avoid using them.
 * __string__ - dynamically-sized UTF-8 encoded string.
 * __address__ - a 20 bytes type that represents an Ethereum address. _This is very important, because it is very common to handle address when coding a smart contract_. An address references either an account or a contract. Every address have the attribute "balance" which shows how many Ether (stored in Wei) that address have. Addresses also have special functions that will talk later. 
 
@@ -84,7 +84,7 @@ The first line `pragma solidity^0.4.24;` indicates which version of Solidity we 
 
 Comments in Solidity are like C++ and Javascript (and many others). However, if a you start a multi-line with an extra asterisk (`/**`) or a single line comment with an extra slash (`///`), then you are indicating that this comment will have tags to complement the information of the definition (similar to a JavaDoc). In my example (lines 2-5), I am using a tag to indicate the title of a contract a another to indicate its author.
 
-Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter).
+Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter). To deploy the contract select its name on the right and click on the deploy button. An instance should appear on the right, click on its name to "open" its options so that we can execute its functions.
 
 ![My First Contract on Remix](/images/remix-first-contract.png)
 
