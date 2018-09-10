@@ -8,7 +8,6 @@ In this section, I will present some hands-on coding exercises for coding smart 
 
 Solidity is high-level language to code smart contracts in the Ehtereum platform. Solidity is a statically typed language inspired by C++, Javascript, and Python. It supports multiple inheritance, user defined types (e.g., structs, enums), and it even has some "syntactic suggar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in depth language description.
 
-
 ### 1.2. Remix
 
 [Remix](https://remix.ethereum.org/) is an IDE for Solidity. It can run directly on your web-browser without the need to download or install anything. Remix uses the latest Javascript compiler for Solidity. One of the best features of Solidity is that it runs on a simulator enviroment by default. Therefore, we can play with contract code without having to connect to the Ethereum blockchain (which we need to pay for most of its operations).
@@ -35,29 +34,9 @@ Now, I recommend paying special attention to the right part, here is where most 
 
 Understanding the Remix IDE is important to execute the tutorial examples. Please come back here and read it again if you are struggling to execute something (most of the time is just a matter is selecting the right thing in one combobox at the Run tab).
 
-### 1.3. Primitive Types
+### 1.3. My First Contract
 
-* __bool__ - 1 byte boolean.
-* __int__ - 32 bytes integer that accepts positive and negative values.
-  * __int8 / int16 / ... int256__ - you customize the integer storage size (in increments of 8 bits) up to 256 bits.
-* __uint__ - 32 bytes integer that accepts only non-negative values (i.e., unsigned integer).
-  * __uint8 / uint16 / ... uint256__ - similar to int, it is possible to customize its storage size (in increments of 8 bits) up to 256 bits.
-* __byte__ - 1 byte.
-  * __bytes1 / bytes2 / ... bytes32__ - syntactic suggar for a byte array (up to 32 bytes).
-* __fixed__ - fixed point numbers (i.e., real numbers). The storage for the integer and fractional part is flexible, and we can specify its place. Fixed is actually an alias for fixed128x18 (see bellow).
-  * __fixed0x8 / fixed0x16 / ... fixed0x256 / ... fixed8x8 ...__ - fixed point number where the first number specifies the number of bits used for the integer part (i.e., before the decimal separator), and the other number specifies the bits for the fractional part. The numbers used must be in increments of 8 (zero is allowed). Moreover, the total amount of bits from both parts must be lower or equal than 256 bits. 
-  * __CAUTION:__ fixed numbers are not fully supported in this version of Solidity, avoid using them.
-* __ufixed__ - unsigned fixed point number. Besides not allowing negative values, it has the same characteristics as fixed.
-  * __ufixed0x8 / ufixed 0x16 / ... ufixed0x256 / ...ufixed8x8 ...__ - it is also possible to customize the storage of ufixed's integer and fractional parts. Same restrictions as fixed applies here as well.
-  * __CAUTION:__ fixed numbers (even the unsigned version) are not fully supported in this version of Solidity, avoid using them.
-* __string__ - dynamically-sized UTF-8 encoded string.
-* __address__ - a 20 bytes type that represents an Ethereum address. _This is very important, because it is very common to handle address when coding a smart contract_. An address references either an account or a contract. Every address have the attribute "balance" which shows how many Ether (stored in Wei) that address have. Addresses also have special functions that will talk later. 
-
-The reason for many types to have the option to customize its storage is "cost". Storage and execution in the Ethereum blockchain have transactional costs attached to them. Therefore, optimizing your contract to use less storage when possible will reduce its overall costs for you and its users.
-
-### 1.4. My First Contract
-
-Lets start by creating our first smart contract in Solidity. Remember to use [Remix](https://remix.ethereum.org/) to deploy the contract and execute its functions.
+Lets start by creating our first smart contract in Solidity. I am a firm believer in "learn by doing it". Remember to use [Remix](https://remix.ethereum.org/) to deploy the contract and execute its functions.
 
 A contract is very similar to a class in a object-oriented programming. It contains attributes, functions, and etc. Lets jump into the code to our first contract (ignore the warnings for now).
 
@@ -84,9 +63,40 @@ The first line `pragma solidity^0.4.24;` indicates which version of Solidity we 
 
 Comments in Solidity are like C++ and Javascript (and many others). However, if a you start a multi-line with an extra asterisk (`/**`) or a single line comment with an extra slash (`///`), then you are indicating that this comment will have tags to complement the information of the definition (similar to a JavaDoc). In my example (lines 2-5), I am using a tag to indicate the title of a contract a another to indicate its author.
 
-Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter). To deploy the contract select its name on the right and click on the deploy button. An instance should appear on the right, click on its name to "open" its options so that we can execute its functions.
+Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter). To deploy the contract select its name on the right part and click on the deploy button. An instance should appear on the right, click on its name to "open" its options so that we can execute its functions.
 
 ![My First Contract on Remix](/images/remix-first-contract.png)
+
+You should note that the select account now has 99.99... Ether instead of the initial 100. This is because every transaction needs to pay a cost (usually defined by gas amount and price). Deploying a contract is a transaction, and as such it also has a cost attached to it. You can also see that deploying a contract created a transaction in the log.
+
+You can now have fun and execute the contract's functions. See how every function call creates a transaction. In the transaction log you can also see the details of transaction (e.g., how gas it spent, its parameters).
+
+Congratulations, you just finished your first contract and interaction with the blockchain.
+
+## 2. Basic Concepts
+
+### 2.1. Primitive Types
+
+The primitive types available in Solidity are the following:
+* __bool__ - 1 byte boolean.
+* __int__ - 32 bytes integer that accepts positive and negative values.
+  * __int8 / int16 / ... int256__ - you customize the integer storage size (in increments of 8 bits) up to 256 bits.
+* __uint__ - 32 bytes integer that accepts only non-negative values (i.e., unsigned integer).
+  * __uint8 / uint16 / ... uint256__ - similar to int, it is possible to customize its storage size (in increments of 8 bits) up to 256 bits.
+* __byte__ - 1 byte.
+  * __bytes1 / bytes2 / ... bytes32__ - syntactic suggar for a byte array (up to 32 bytes).
+* __fixed__ - fixed point numbers (i.e., real numbers). The storage for the integer and fractional part is flexible, and we can specify its place. Fixed is actually an alias for fixed128x18 (see bellow).
+  * __fixed0x8 / fixed0x16 / ... fixed0x256 / ... fixed8x8 ...__ - fixed point number where the first number specifies the number of bits used for the integer part (i.e., before the decimal separator), and the other number specifies the bits for the fractional part. The numbers used must be in increments of 8 (zero is allowed). Moreover, the total amount of bits from both parts must be lower or equal than 256 bits. 
+  * __CAUTION:__ fixed numbers are not fully supported in this version of Solidity, avoid using them.
+* __ufixed__ - unsigned fixed point number. Besides not allowing negative values, it has the same characteristics as fixed.
+  * __ufixed0x8 / ufixed 0x16 / ... ufixed0x256 / ...ufixed8x8 ...__ - it is also possible to customize the storage of ufixed's integer and fractional parts. Same restrictions as fixed applies here as well.
+  * __CAUTION:__ fixed numbers (even the unsigned version) are not fully supported in this version of Solidity, avoid using them.
+* __string__ - dynamically-sized UTF-8 encoded string.
+* __address__ - a 20 bytes type that represents an Ethereum address. _This is very important, because it is very common to handle address when coding a smart contract_. An address references either an account or a contract. Every address have the attribute "balance" which shows how many Ether (stored in Wei) that address have. Addresses also have special functions that will talk later. 
+
+The reason for many types to have the option to customize its storage is "cost". Storage and execution in the Ethereum blockchain have transactional costs attached to them. Therefore, optimizing your contract to use less storage when possible will reduce its overall costs for you and its users.
+
+
 
 
 
