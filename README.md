@@ -1,39 +1,25 @@
-## Home Page
+## Under construction.
 
-- [Lesson 1](handson.html)
+Please wait until my presention at CBSoft (September 17) to access this page and materials. I am still editing and trying to improve its contents.
 
-You can use the [editor on GitHub](https://github.com/hscrocha/bc-tutorial-2018/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Introduction
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Blockchain has become very popular recently due to the general adoption of cryptocurrencies. Nowadays, cryptocurrencies like BitCoin and Ether are common enough to be recognized by most people. Even though blockchain technology is mostly recognized for its cryptocurrencies, a very important and prominent application of blockchain is the execution of Smart Contracts. The term blockchain-oriented software (BOS) defines applications that interact with blockchain, usually by using a smart contract. The popularity and rapid growth of BOS are creating problems that fall within the scope of Software Engineering. 
 
-### Markdown
+In this context, a new research topic has been discovered: Blockchain-oriented Software Engineering (BOSE); as we need novel and specialized software engineering practices to handle blockchain applications. The first part of the tutorial is a presentation (at CBSoft 2018) to provide a background knowledge of Blockchain and Smart Contracts so that researchers may understand better this new technology, its pitfalls, and opportunities. The second part is devoted to hands-on exercises and tools to interact with blockchain. This tutorial is supposed to be understandable even if a person has almost no previous knowledge on this topic.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+In this page you can find the materials for the tutorial including slides, lessons, code, and etc.
 
-```markdown
-Syntax highlighted code block
+### Tutorial
 
-# Header 1
-## Header 2
-### Header 3
+- Slides
+- [Exercise: Hands-On Begginers to Solidity](handson.html)
+- Exercise: Solidity Coding Patterns
+- Exercise: Tools for Smart Contract Analysis
+- About me.
 
-- Bulleted
-- List
+### Disclaimer
 
-1. Numbered
-2. List
+This is personal page and I am not responsible...bla bla.
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/hscrocha/bc-tutorial-2018/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Permission is granted to use my material as long as you reference its source (this repository) and give me credit for my work.
