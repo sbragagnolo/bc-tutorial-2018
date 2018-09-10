@@ -25,8 +25,15 @@ Now, I recommend paying special attention to the right part, here is where most 
 
 * The enviroment combobox for this tutorial should be JavaScript VM. That is a simulation of an Ethereum blockchain. The other enviroment options allow to actually connect to Ethereum. 
 * The accounts will have some pre-generated user accounts, each with 100 Ether on it (on the JavaScript VM enviroment). We will need accounts to deploy and interact with contracts. The selected account in this comboox will be the one that is "executing" the operations. 
-* The gas limit is how much gas we are sending when we execute the next transaction. For more information on gas check [this](https://solidity.readthedocs.io/en/v0.4.24/introduction-to-smart-contracts.html?highlight=gas%20limit#gas).
+* The gas limit is how much gas we are sending when we execute the next transaction. For more information on gas check [this](https://solidity.readthedocs.io/en/v0.4.24/introduction-to-smart-contracts.html?limit#gas).
 * Value is how much cryptocurrency the selected account will send when we execute the next transaction. The usually unit is Wei (1 Ether = 10^18 Wei ), but we can change the unit on the left combobox of value.
+* The next combobox will have the available contracts on this source code that compile without errors. 
+* The deploy bottom will deploy one instance of the selected contract (on the above combobox).
+* The next textfield is used to load a contract instance that was previously deployed. The specified address will be "type-casted" as the selected contract on the above combobox.
+* The next panel shows the transactions recorded for this contract. This differs from the transaction log at the bottom that shows transaction from every contract.
+* The final panel is where your deployed contracts will be. Clicking on the deployed contract instance will open the options to call its functions (and that is how we interact with contracts).
+
+Understanding the Remix IDE is important to execute the tutorial examples. Please come back here and read it again if you are struggling to execute something (most of the time is just a matter is selecting the right thing in one combobox at the Run tab).
 
 ### 1.3. Primitive Types
 
