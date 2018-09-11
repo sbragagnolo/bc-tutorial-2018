@@ -285,7 +285,7 @@ There are some special syntax and pre-defined functions to handle Ether. Lets re
 
 * __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. When a payable function receives Ether, it automatically adds the sent funds to its contract's. __Please note__ that payable is only required for a function to __receive__ ether. If a function __sends__ it does not need the payable modifier.
 * __address__ - the primitive type address references an account or a contract. We need to typecast a contract to address to use its attributes and functions. 
-    * __\<address>.balance__ - the balance shows how many Ether (measured in Wei) that address have. Useful to check if the address have suficients funds for an operation.
+    * __\<address>.balance__ - the balance shows how many Ether (measured in Wei) that address have. Useful to check if the address have suficients funds for an operation. __ATTENTION:__ you cannot modify the value of balance but only read it. Balance is always automatically updated by the Ethereum blockchain. 
     * __\<address>.transfer(uint amount )__ - sends money from the current contract to the address. Raises an exception if failed.
     * __\<address>.send( uint amount )__ - sends money from the current contract to the address. Returns false if failed. 
 * __msg__ - references the current message call (i.e., function call).
