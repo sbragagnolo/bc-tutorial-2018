@@ -394,6 +394,7 @@ function addSuper(address s) public {
     supervisors[ superCount++ ] = s;
 }
 ```
+
 * __mapping__ - a mapping is like a hash table where we define the key => value. Not every type can used as key, but any primitive type is safe to use. For the value almost anything can be used. The mapping is virtually initialized in way that every key exists and the value is set to zero (or a byte-representation composed of only zeros). Example: 
 
 ```solidity
