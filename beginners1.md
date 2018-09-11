@@ -1,4 +1,4 @@
-# Exercises: Hands-on Beginner to Solidity
+# Hands-on: Beginners to Solidity
 
 In this section, I will present some hands-on coding exercises for coding smart contracts in Solidity. I will also explain some of the basic concepts of the Solidity language before each exercise.
 
