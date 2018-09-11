@@ -119,6 +119,57 @@ Modifiers specify a behaviour that a function implements. The pre-defined modifi
     * __constant__ - deprecated for functions but still used for attributes. A constant attribute cannot be modified and  
 * __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. 
 
+In Solidity it is also possible for developers to create their own custom modifiers for functions. 
+
 ### 2.4. Back to the First Contract
+
+Lets go back to our first contract. The warnings showed by Remix is related to missing modifiers, you can probably fix them by now. Now we change the contract a little to use more of the concepts I just presented.
+
+```solidity
+pragma solidity ^0.4.24;
+/**
+ * @title Simple Contract
+ * @author Henrique
+ */
+contract SimpleContract {
+    uint public data = 10;
+    string private name;
+    
+    function setName(string _name) public{
+        name = _name;
+    }
+    
+    function getName() public view returns (string) {
+        return name;
+    }
+
+    function get() public view returns (string,uint){
+        return (name,data);
+    }
+    
+    function calc(uint a, uint b) public pure returns(uint){
+        return (a+1)*(b+1);
+    }
+}
+```
+
+Try out changing the visibility modifiers on the "data" attribute and deploying the contract again. The new functions I created was to show returning multiple parameters and a "pure" function.
+
+## 3. X
+
+### 3.1. Constructor
+
+
+
+### 3.2. Pre-defined Variables
+
+There are some pre-defined variables available to use in any contract. Usually, they provide information related to the blockchain platform. I am going to show a small list of the ones most used, for a complete list [see this](https://solidity.readthedocs.io/en/v0.4.24/units-and-global-variables.html#block-and-transaction-properties).
+* __msg__ - references the current message call (i.e., function call).
+    * __msg.sender__ - address, the account or contract that initiated the message call.
+    * __msg.value__ - uint, the amount of Wei ( 10^-18 Ether ) sent in this message.
+* __block__ - reference the current block.
+    * __block.timestamp__ - uint, the timestamp in the current block.
+* __now__ - uint, an alias for block.timestamp.
+
 
 
