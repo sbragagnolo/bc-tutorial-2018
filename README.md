@@ -1,6 +1,6 @@
 ## Under construction.
 
-Please wait until my presention at CBSoft (September 17) to access this page and materials. I am still editing and trying to improve its contents.
+Please wait until my presentation at CBSoft (September 17) to access this page and materials. I am still editing and trying to improve its contents.
 
 ## Introduction
 
@@ -13,7 +13,7 @@ In this page you can find the materials for the tutorial including slides, lesso
 ### Tutorial
 
 * Slides
-* [Hands On: Begginers to Solidity](beginners1.md)
+* [Hands-On: Beginners to Solidity](beginners1.md)
 * Hands On: Solidity Coding Patterns
 * Hands On: Tools for Smart Contract Analysis 
 
