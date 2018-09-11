@@ -108,7 +108,7 @@ The primitive types available in Solidity are the following:
 
 The reason for many types to have the option to customize its storage is "cost". Storage and execution in the Ethereum blockchain have transactional costs attached to them. Therefore, optimizing your contract to use less storage when possible will reduce its overall costs for you and its users.
 
-### 2.3. Pre-defined Modifiers
+### 2.2. Pre-defined Modifiers
 
 Modifiers affect the behaviour of a resource (e.g., function, attribute). In a function, the modifier is placed after its parameters definition. For an attribute, the modifier is placed after its type. The pre-defined modifiers that we can use are the following:
 
@@ -293,5 +293,36 @@ There are some special syntax and pre-defined functions to handle Ether. Lets re
 
 ### 4.2. Wallet Contract version 1
 
+As an example lets code a Wallet. Only the owner should be able to pay to another address with funds from his wallet. Anyone can deposit money into the wallet (someone could be paying the owner by doing so). We also need to create a withdraw feature where the owner could transfer funds from his wallet to his account. In the example bellow I coded only the function signatures (except for getBalance), as an exercise you should try to complete the code inside each block (i.e., constructor, modifiers, and functions). You don't need to change the function signatures, just code what should be place inside.
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Wallet Contract Example v1
+ * @author Henrique
+ **/
+contract MyWallet{
+    address private owner;
+    uint8 constant private version = 1; //just to keep track of the versions 
+    
+    constructor() public {}
+    modifier onlyOwner(){}
+    modifier checkBalance(uint amount){}
+    
+    function getBalance() public view returns(uint){
+        return address(this).balance;
+    }
+
+    function pay(address receiver, uint amount) public onlyOwner checkBalance(amount) {}
+    
+    function deposit() public payable{}
+    
+    function withdraw(uint amount) public onlyOwner checkBalance(amount) {}
+} //end of contract
+```
+
+After you are done, you should deploy the contract and try to send money to it. Please remember to adjust the "value" in the Run tab before trying to execute the deposit function. You can also send money to other accounts using the pay function on your wallet. For now it is not possible for one Wallet instance to interact with another (using pay to another Wallet will raise an exception). We will handle this limitation shortly.
+
+You can check the complete code from the above example [here](contracts/wallet1.sol). 
 
 
