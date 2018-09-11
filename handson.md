@@ -8,6 +8,18 @@ In this section, I will present some hands-on coding exercises for coding smart 
 
 Solidity is high-level language to code smart contracts in the Ethereum platform. Solidity is a statically typed language inspired by C++, Javascript, and Python. It supports multiple inheritance, user defined types (e.g., structs, enums), and it even has some "syntactic suggar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in depth language description.
 
+Most of the language commands resemble JavaScript, for example the code sniped bellow show a simple usage of an "for" and a "if-else" statements.
+```solidity
+for(int i=0; i<10; i++){
+    if( i%2 == 0 ){
+        // Do something...
+    }
+    else{
+        // Do something else ...
+    }
+}
+```
+
 ### 1.2. Remix
 
 [Remix](https://remix.ethereum.org/) is an IDE for Solidity. It can run directly on your web-browser without the need to download or install anything. Remix uses the latest Javascript compiler for Solidity. One of the best features of Solidity is that it runs on a simulator enviroment by default. Therefore, we can play with contract code without having to connect to the Ethereum blockchain (which we need to pay for most of its operations).
@@ -96,30 +108,45 @@ The primitive types available in Solidity are the following:
 
 The reason for many types to have the option to customize its storage is "cost". Storage and execution in the Ethereum blockchain have transactional costs attached to them. Therefore, optimizing your contract to use less storage when possible will reduce its overall costs for you and its users.
 
-### 2.2. Functions
+### 2.3. Pre-defined Modifiers
+
+Modifiers affect the behaviour of a resource (e.g., function, attribute). In a function, the modifier is placed after its parameters definition. For an attribute, the modifier is placed after its type. The pre-defined modifiers that we can use are the following:
+
+* __Visibility modifiers__ - specifies who can access the resource. Each resource can only have one visibility modifier. Most of them can also be applied to contract's attributes as well. The term "visibility" is misleading because the resource (specially contract's attributes) is still visible, just not accessible.
+    * __private__ - only the contract that defined a private resource can access it. __Extreme Caution:__ unlike other programming languages, a private attribute of a smart contract is still visible to anyone in the blockchain. Therefore, do not count on its invisibility to perform any action.
+    * __internal__ - similar to "protected" in C++/Java, the resource is accessible to the current contract and the ones deriving from it. This is the default visibility if you did not defined one for an attribute.
+    * __public__ - any contract or account can access this resource. If it is an attribute, other contracts can also modify its value. This is the default visibility for functions.
+    * __external__ - only for functions, mostly used when we define an interface to another contract which we don't have the code. 
+* __State Mutability modifiers__ - basically, if a function performs "read-only" tasks on the contract, or does not even use its internal attributes, we can specify it by using mutability modifiers. __This is very important__, since these functions do not modify anything on the blockchain, they will not create a transaction when called. Therefore, there will be no cost when calling such functions.
+    * __view__ - if a function does not modify the internal contract state (i.e., its attributes), and only reads value from it, we can mark it as "view". As an analogy, you can think of "view" as "read-only" functions. Attributes can not be marked with it.
+    * __pure__ - if a function does not modify or even read the internal state, it can be marked as "pure". Attributes cannot be "pure". For example see the function bellow:
+    ```solidity
+    function calc(uint a, uint b) public pure returns(uint){
+        return (a+1)*(b+1);
+    }
+    ```
+    * __constant__ - deprecated for functions but still used for attributes. A constant attribute cannot be modified and we must specify its value at declaration. For example:
+    ```solidity
+    function calc(uint a, uint b) public pure returns(uint){
+        return (a+1)*(b+1);
+    }
+    ```    
+* __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. When a payable function receives Ether, it automatically adds the sent funds to its contract's.
+
+In Solidity it is also possible for developers to create their own custom modifiers for functions (which I will show later). 
+
+### 2.3. Functions
 
 The "rules" enforced by a smart contract are defined by its functions. A function always starts with a "function" keyword followed by its name. Then we can define the parameters if any. After the parameters, we can specify modifiers to the function. Finaly, we can specify the returned type (or types) of the function.
 
 Solidity supports function overloading (i.e., functions with the same name/id but with different parameters). Just be carefull that some types may resolve as the same paramter when compiled (e.g., a contract in a parameter will be turned into an address).
 
-Another peculiarity of Solidity is that you can return more than one value in a function (I will create an example of that shortly). Unfortunately, not every type can be returned by a function (e.g., structs, dynamic arrays).
-
-### 2.3. Pre-defined Modifiers
-
-Modifiers specify a behaviour that a function implements. The pre-defined modifiers that we can use are the following:
-
-* __Visibility modifiers__ - specifies who can access the resource. Each resource can only have one visibility modifier. Most of them can also be applied to contract's attributes as well. We used the term "visibility" is misleading because the resource (specially contract's attributes) is still visible, just not accessible.
-    * __private__ - only the contract that defined a private resource can access it. __Extreme Caution:__ unlike other programming languages, a private attribute of a smart contract is still visible to anyone in the blockchain. Therefore, do not count on its invisibility to perform any action.
-    * __internal__ - similar to "protected" in C++/Java, the current contract and the ones deriving from it. This is the default visibility if you did not defined one for a contract's attribute.
-    * __public__ - any contract or account can access this resource. If it is an attribute, other contracts can also modify its value. This is the default visibility for functions.
-    * __external__ - only for functions, mostly used when we define an interface to another contract which we don't have the code. 
-* __State Mutability modifiers__ - basically, if you function performs "read-only" on the contract, or does not even use its internal attributes, we can specify it by using mutability modifiers. __This is very important__, since these functions do not modify anything on the blockchain, they will not create a transaction when called. Therefore, there will be no cost when calling such functions.
-    * __view__ - if a function does not modify the internal contract state (i.e., its attributes), and only reads value from it, we can mark it as "view". As an analogy, you can think of "view" as "read-only" functions. Attributes can not be marked with it.
-    * __pure__ - if a function does not modify or even read the internal state, it can be marked as "pure". Attributes cannot be "pure". 
-    * __constant__ - deprecated for functions but still used for attributes. A constant attribute cannot be modified and  
-* __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. 
-
-In Solidity it is also possible for developers to create their own custom modifiers for functions. 
+Another peculiarity of Solidity is that you can return more than one value in a function (I will create an example of that shortly). Unfortunately, not every type can be returned by a function (e.g., structs, dynamic arrays). For example
+```solidity
+function f() public pure returns(uint,string,int){
+    return (42,"Hello World",-1);
+}
+```
 
 ### 2.4. Back to the First Contract
 
@@ -146,19 +173,22 @@ contract SimpleContract {
     function get() public view returns (string,uint){
         return (name,data);
     }
-    
-    function calc(uint a, uint b) public pure returns(uint){
-        return (a+1)*(b+1);
-    }
 }
 ```
 
-Try out changing the visibility modifiers on the "data" attribute and deploying the contract again. The new functions I created was to show returning multiple parameters and a "pure" function.
+Try out changing the visibility modifiers on the "data" attribute and deploying the contract again. The new functions I created was to show returning multiple parameters.
 
 ## 3. X
 
 ### 3.1. Constructor
 
+Similar to object-oriented classes, we can define a constructor for a contract. However, unlike classes, a contract can only have 1 contructor. A contructor can have parameters but when we deploy the contract we must also provide all parameters defined on its construtor. The visibility must be either _public_ or _internal_ (it is not possible to create private or external constructors). Moreover, the only other possible modifier that a constructor can have is _payable_ if it receives Ether on its creation. 
+
+```solidity
+constructor(address a, address b) public {
+    // Do something...
+}
+```
 
 
 ### 3.2. Pre-defined Variables
@@ -170,6 +200,80 @@ There are some pre-defined variables available to use in any contract. Usually, 
 * __block__ - reference the current block.
     * __block.timestamp__ - uint, the timestamp in the current block.
 * __now__ - uint, an alias for block.timestamp.
+
+You should pay attention specially to __msg.sender__, as it is probably the most used pre-defined variable. For example, whoever called the constructor is the "person" creating the contract, and we can store that for security checks later.
+
+```solidity
+contract C {
+    address private owner;
+    
+    constructor() public {
+        owner = msg.sender;
+    }
+    // other functions and attributes
+}
+```
+
+### 3.3. Exceptions
+
+The way to handle errors in Solidity is by raising exceptions. An exception undo all changes made in the current execution (propagating to the other function calls). The exception code we can use in our functions are the following:
+* __require( condition, message )__ - raises an exception if the condition is false and returns the message to the caller. This is the code that you should use for most situations. Even though the message is optional, it is good practice to always define it. Otherwise the caller may not know why the exception was raised.
+* __revert( message )__ - raiseas an exception and returns the message to the caller. The message is optinal, but it is a good practice to use it. 
+* __assert( condition )__ - raises an exception if the condition is false. It may look like require but assert should be used for internal checks.
+* __throw__ - deprecated in the current version of Solidity, avoid using it. Throw raises an exception.
+
+
+### 3.4. Custom Modifiers
+
+In Solidity, we can create custom function modifiers. The ideia is to ammend the semantics of function with reusable code. Mostly used for checking condition and raising exceptions. 
+
+We use the "modifier" keyword to create one. A modifier can have parameters. The placeholder statement ("\_;") indicates where the actual function code will be placed. This allows modifiers to ammend code before or after (or both) of the normal function code.
+
+```solidity
+modifier checkBalance(uint amount){
+    require( address(this).balance >= amount, "Insuficient funds for this operation");
+    _; // <-- Here is where the normal function code will be placed
+}
+
+function foo(uint amount) public payable checkBalance(amount) {
+    // Do something... but before the checkBalance will perform its check
+}
+```
+
+### 3.5. Restrict Access Contract
+
+Now that we know about constructors, pre-defined variables, and modifiers, I can show an example for a restrict access contract. In this case, we want to restrict the access of certain functions that only the creator (owner) can invoke them. If anyone else calls such functions then an exception should be raised. 
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Restricted Access Example
+ * @author Henrique
+ */ 
+contract Restricted {
+   address private owner;
+   uint private data;
+   
+   constructor() public{
+       owner = msg.sender;
+   }
+
+   modifier onlyOwner(){
+       require(owner == msg.sender, "Only owner can call this function");
+       _;
+   }
+   
+   function setData(uint d) public onlyOwner{
+       data = d;
+   }
+   
+   function getData() public view returns (uint) {
+       return data;
+   }
+} //end of contract
+```
+
+You can deploy the contract using one account and use the "setData" function to modify the dta. After that, change the selected account on the "account combobox" and try calling the function again. You should see an exception in the transactions log and also the message we placed on the require.
 
 
 
