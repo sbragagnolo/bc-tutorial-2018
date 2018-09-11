@@ -141,7 +141,7 @@ The "rules" enforced by a smart contract are defined by its functions. A functio
 
 Solidity supports function overloading (i.e., functions with the same name/id but with different parameters). Just be carefull that some types may resolve as the same paramter when compiled (e.g., a contract in a parameter will be turned into an address).
 
-Another peculiarity of Solidity is that you can return more than one value in a function (I will create an example of that shortly). Unfortunately, not every type can be returned by a function (e.g., structs, dynamic arrays). For example
+Another peculiarity of Solidity is that you can return more than one value in a function (I will create an example of that shortly). Unfortunately, not every type can be returned by a function (e.g., structs, dynamic arrays). For example, function f bellow returns three different types. 
 ```solidity
 function f() public pure returns(uint,string,int){
     return (42,"Hello World",-1);
@@ -236,7 +236,7 @@ modifier checkBalance(uint amount){
 }
 
 function foo(uint amount) public payable checkBalance(amount) {
-    // Do something... but before the checkBalance will perform its check
+    // Do something... 
 }
 ```
 
@@ -274,6 +274,24 @@ contract Restricted {
 ```
 
 You can deploy the contract using one account and use the "setData" function to modify the dta. After that, change the selected account on the "account combobox" and try calling the function again. You should see an exception in the transactions log and also the message we placed on the require.
+
+## 4. Dealing with Money (Ether)
+
+One of the major advantages of Smart Contracts is dealing with crypto-currency (in Ethereum always measured in Wei).
+
+### 4.1. Special Code for Money
+
+There are some special syntax and pre-defined functions to handle Ether. Lets revise some of terms and present new ones:
+
+* __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. When a payable function receives Ether, it automatically adds the sent funds to its contract's. __Please note__ that payable is only required for a function to __receive__ ether. If a function __sends__ it does not need the payable modifier.
+* __address__ - the primitive type address references an account or a contract. We need to typecast a contract to address to use its attributes and functions. 
+    * __\<address>.balance__ - the balance shows how many Ether (measured in Wei) that address have. Useful to check if the address have suficients funds for an operation.
+    * __\<address>.transfer(uint amount )__ - sends money from the current contract to the address. Raises an exception if failed.
+    * __\<address>.send( uint amount )__ - sends money from the current contract to the address. Returns false if failed. 
+* __msg__ - references the current message call (i.e., function call).
+    * __msg.value__ - uint, the amount of Wei ( 10^-18 Ether ) sent in this message. We need to use this if we want to know how much money was sent.
+
+### 4.2. Wallet Contract version 1
 
 
 
