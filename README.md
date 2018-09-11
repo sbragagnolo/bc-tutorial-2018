@@ -14,8 +14,8 @@ In this page you can find the materials for the tutorial including slides, lesso
 
 * Slides
 * [Hands-On: Beginners to Solidity](beginners1.md)
-* Hands On: Solidity Coding Patterns
-* Hands On: Tools for Smart Contract Analysis 
+* Hands-On: Solidity Coding Patterns
+* Hands-On: Tools for Smart Contract Analysis 
 
 ### About me.
 
@@ -25,6 +25,6 @@ I am Henrique Rocha, a Post-Doctoral researcher in Inria Lille (2017-2019). My c
 
 ### Disclaimer
 
-This is personal page and I am not responsible...bla bla.
+This is tutorial made from my personal experiences and knowledge on the topic. The intent on this material is for personal usage. I am not responsible for any issues, problems, or etc., if my code examples are used outside the simulation environment.
 
 Permission is granted to use my material as long as you reference its source (this repository) and give me credit for my work.
