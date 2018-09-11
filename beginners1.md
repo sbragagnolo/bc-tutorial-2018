@@ -6,9 +6,9 @@ In this section, I will present some hands-on coding exercises for coding smart 
 
 ### 1.1. What is Solidity
 
-Solidity is high-level language to code smart contracts in the Ethereum platform. Solidity is a statically typed language inspired by C++, Javascript, and Python. It supports multiple inheritance, user defined types (e.g., structs, enums), and it even has some "syntactic suggar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in depth language description.
+Solidity is high-level language to code smart contracts in the Ethereum platform. Solidity is a statically typed language inspired by C++, JavaScript, and Python. It supports multiple inheritance, user defined types (e.g., structs, enums), and it even has some "syntactic sugar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in depth language description.
 
-Most of the language commands resemble JavaScript, for example the code sniped bellow show a simple usage of an "for" and a "if-else" statements.
+Most of the language commands resemble JavaScript, for example the code sniped bellow show a simple usage of a "for" and an "if-else" statements.
 ```solidity
 for(int i=0; i<10; i++){
     if( i%2 == 0 ){
@@ -22,29 +22,29 @@ for(int i=0; i<10; i++){
 
 ### 1.2. Remix
 
-[Remix](https://remix.ethereum.org/) is an IDE for Solidity. It can run directly on your web-browser without the need to download or install anything. Remix uses the latest Javascript compiler for Solidity. One of the best features of Solidity is that it runs on a simulator enviroment by default. Therefore, we can play with contract code without having to connect to the Ethereum blockchain (which we need to pay for most of its operations).
+[Remix](https://remix.ethereum.org/) is an IDE for Solidity. It can run directly on your web-browser without the need to download or install anything. Remix uses the latest JavaScript compiler for Solidity. One of the best features of Solidity is that it runs on a simulator environment by default. Therefore, we can play with contract code without having to connect to the Ethereum blockchain (which we need to pay for most of its operations).
 
 All the exercises in this section use Remix. Therefore, you should open and get acquainted with it. The figure bellow shows the Remix interface.
 
 ![Remix Interface](/images/remix.png)
 
-At the left part of the screen, we can see "browser" and "config". Browser will show all contracts that you have created in Remix. Config is used for special setup and I will not use that. At the very top on the left part, we can see some small icons. The most important one (and the only we are going to need) is the first icon that looks like a plus sign. That icon creates a new contract.
+At the left part of the screen, we can see "browser" and "config". The browser will show all contracts that you have created in Remix. Config is used for special setup and I will not use that. At the very top on the left part, we can see some small icons. The most important one (and the only we are going to need) is the first icon that looks like a plus sign. That icon creates a new contract.
 
 The middle part of the screen is the code editor. The lower part of the middle screen is the transactions log. Every operation on the blockchain creates a transaction. Remix will show on this log every transaction that it created. 
 
 Now, I recommend paying special attention to the right part, here is where most of our interactions with the smart contracts will happen. There are 6 tabs on the right part, but for this tutorial we only need the first two: "compile" and "run". Compile is useful to verify the errors and warnings on your code, use this tab if you are having a hard time fixing your code. The Run tab is where the "magic" is, so lets focus on it.
 
-* The enviroment combobox for this tutorial should be JavaScript VM. That is a simulation of an Ethereum blockchain. The other enviroment options allow to actually connect to Ethereum. 
-* The accounts will have some pre-generated user accounts, each with 100 Ether on it (on the JavaScript VM enviroment). We will need accounts to deploy and interact with contracts. The selected account in this comboox will be the one that is "executing" the operations. 
+* The environment combo-box for this tutorial should be JavaScript VM. That is a simulation of an Ethereum blockchain. The other environment options allow to actually connect to Ethereum. 
+* The accounts will have some pre-generated user accounts, each with 100 Ether on it (on the JavaScript VM environment). We will need accounts to deploy and interact with contracts. The selected account in this combo-box will be the one that is "executing" the operations. 
 * The gas limit is how much gas we are sending when we execute the next transaction. For more information on gas check [this](https://solidity.readthedocs.io/en/v0.4.24/introduction-to-smart-contracts.html?limit#gas).
-* Value is how much cryptocurrency the selected account will send when we execute the next transaction. The usually unit is Wei (1 Ether = 10^18 Wei ), but we can change the unit on the left combobox of value.
-* The next combobox will have the available contracts on this source code that compile without errors. 
-* The deploy bottom will deploy one instance of the selected contract (on the above combobox).
-* The next textfield is used to load a contract instance that was previously deployed. The specified address will be "type-casted" as the selected contract on the above combobox.
+* Value is how much cryptocurrency the selected account will send when we execute the next transaction. The usually unit is Wei (1 Ether = 10^18 Wei ), but we can change the unit on the left combo-box of value.
+* The next combo-box will have the available contracts on this source code that compile without errors. 
+* The deploy bottom will deploy one instance of the selected contract (on the above combo-box).
+* The next textfield is used to load a contract instance that was previously deployed. The specified address will be "type-casted" as the selected contract on the above combo-box.
 * The next panel shows the transactions recorded for this contract. This differs from the transaction log at the bottom that shows transaction from every contract.
 * The final panel is where your deployed contracts will be. Clicking on the deployed contract instance will open the options to call its functions (and that is how we interact with contracts).
 
-Understanding the Remix IDE is important to execute the tutorial examples. Please come back here and read it again if you are struggling to execute something (most of the time is just a matter is selecting the right thing in one combobox at the Run tab).
+Understanding the Remix IDE is important to execute the tutorial examples. Please come back here and read it again if you are struggling to execute something (most of the time is just a matter is selecting the right thing in one combo-box at the Run tab).
 
 ### 1.3. My First Contract
 
@@ -73,7 +73,7 @@ contract MyFirstContract {
 
 The first line `pragma solidity^0.4.24;` indicates which version of Solidity we are using (I am using the most current version at the time I wrote this tutorial). Since the Solidity language is still under development, a lot can change between even minor versions releases. Therefore, specifying the version makes the compiler aware of which version to use. 
 
-Comments in Solidity are like C++ and Javascript (and many others). However, if a you start a multi-line with an extra asterisk (`/**`) or a single line comment with an extra slash (`///`), then you are indicating that this comment will have tags to complement the information of the definition (similar to a JavaDoc). In my example (lines 2-5), I am using a tag to indicate the title of a contract a another to indicate its author.
+Comments in Solidity are like C++ and JavaScript (and many others). However, if a you start a multi-line with an extra asterisk (`/**`) or a single line comment with an extra slash (`///`), then you are indicating that this comment will have tags to complement the information of the definition (similar to a JavaDoc). In my example (lines 2-5), I am using a tag to indicate the title of a contract a another to indicate its author.
 
 Every contract is created by using the `contract` keyword. As I previously said, it can contain attributes, functions, and other elements. In this contract, I created one attribute called 'name' and two functions. For now you can ignore the warning on the functions (I will came back to fix these warnings latter). To deploy the contract select its name on the right part and click on the deploy button. An instance should appear on the right, click on its name to "open" its options so that we can execute its functions.
 
@@ -96,7 +96,7 @@ The primitive types available in Solidity are the following:
 * __uint__ - 32 bytes integer that accepts only non-negative values (i.e., unsigned integer).
   * __uint8 / uint16 / ... uint256__ - similar to int, it is possible to customize its storage size (in increments of 8 bits) up to 256 bits.
 * __byte__ - 1 byte.
-  * __bytes1 / bytes2 / ... bytes32__ - syntactic suggar for a byte array (up to 32 bytes).
+  * __bytes1 / bytes2 / ... bytes32__ - syntactic sugar for a byte array (up to 32 bytes).
 * __fixed__ - fixed point numbers (i.e., real numbers). The storage for the integer and fractional part is flexible, and we can specify its place. Fixed is actually an alias for fixed128x18 (see bellow).
   * __fixed0x8 / fixed0x16 / ... fixed0x256 / ... fixed8x8 ...__ - fixed point number where the first number specifies the number of bits used for the integer part (i.e., before the decimal separator), and the other number specifies the bits for the fractional part. The numbers used must be in increments of 8 (zero is allowed). Moreover, the total amount of bits from both parts must be lower or equal than 256 bits. 
   * __CAUTION:__ fixed numbers are not fully supported in this version of Solidity, avoid using them.
@@ -110,7 +110,7 @@ The reason for many types to have the option to customize its storage is "cost".
 
 ### 2.2. Pre-defined Modifiers
 
-Modifiers affect the behaviour of a resource (e.g., function, attribute). In a function, the modifier is placed after its parameters definition. For an attribute, the modifier is placed after its type. The pre-defined modifiers that we can use are the following:
+Modifiers affect the behavior of a resource (e.g., function, attribute). In a function, the modifier is placed after its parameters definition. For an attribute, the modifier is placed after its type. The predefined modifiers that we can use are the following:
 
 * __Visibility modifiers__ - specifies who can access the resource. Each resource can only have one visibility modifier. Most of them can also be applied to contract's attributes as well. The term "visibility" is misleading because the resource (specially contract's attributes) is still visible, just not accessible.
     * __private__ - only the contract that defined a private resource can access it. __Extreme Caution:__ unlike other programming languages, a private attribute of a smart contract is still visible to anyone in the blockchain. Therefore, do not count on its invisibility to perform any action.
@@ -135,13 +135,13 @@ In Solidity it is also possible for developers to create their own custom modifi
 
 ### 2.3. Functions
 
-The "rules" enforced by a smart contract are defined by its functions. A function always starts with a "function" keyword followed by its name. Then we can define the parameters if any. After the parameters, we can specify modifiers to the function. Finaly, we can specify the returned type (or types) of the function.
+The "rules" enforced by a smart contract are defined by its functions. A function always starts with a "function" keyword followed by its name. Then we can define the parameters if any. After the parameters, we can specify modifiers to the function. Finally, we can specify the returned type (or types) of the function.
 
-Solidity supports function overloading (i.e., functions with the same name/id but with different parameters). Just be carefull that some types may resolve as the same paramter when compiled (e.g., a contract in a parameter will be turned into an address).
+Solidity supports function overloading (i.e., functions with the same name/id but with different parameters). Just be careful that some types may resolve as the same parameter when compiled (e.g., a contract in a parameter will be turned into an address).
 
 Another peculiarity of Solidity is that you can return more than one value in a function (I will create an example of that shortly). Unfortunately, not every type can be returned by a function (e.g., structs, dynamic arrays). For example, function f bellow returns three different types. 
 ```solidity
-function f() public pure returns(uint,string,int){
+function f() public pure returns(uint, string, int){
     return (42,"Hello World",-1);
 }
 ```
@@ -168,19 +168,19 @@ contract SimpleContract {
         return name;
     }
 
-    function get() public view returns (string,uint){
+    function get() public view returns (string, uint){
         return (name,data);
     }
 }
 ```
 
-Try out changing the visibility modifiers on the "data" attribute and deploying the contract again. The new functions I created was to show returning multiple parameters.
+Try out changing the visibility modifiers on the "data" attribute and deploying the contract again. The new function I created was to show returning multiple parameters.
 
 ## 3. X
 
 ### 3.1. Constructor
 
-Similar to object-oriented classes, we can define a constructor for a contract. However, unlike classes, a contract can only have 1 contructor. A contructor can have parameters but when we deploy the contract we must also provide all parameters defined on its construtor. The visibility must be either _public_ or _internal_ (it is not possible to create private or external constructors). Moreover, the only other possible modifier that a constructor can have is _payable_ if it receives Ether on its creation. 
+Similar to object-oriented classes, we can define a constructor for a contract. However, unlike classes, a contract can only have 1 constructor. A constructor can have parameters but when we deploy the contract we must also provide all parameters defined on its constructor. The visibility must be either _public_ or _internal_ (it is not possible to create private or external constructors). Moreover, the only other possible modifier that a constructor can have is _payable_ if it receives Ether on its creation. 
 
 ```solidity
 constructor(address a, address b) public {
@@ -189,9 +189,9 @@ constructor(address a, address b) public {
 ```
 
 
-### 3.2. Pre-defined Variables
+### 3.2. Predefined Variables
 
-There are some pre-defined variables available to use in any contract. Usually, they provide information related to the blockchain platform. I am going to show a small list of the ones most used, for a complete list [see this](https://solidity.readthedocs.io/en/v0.4.24/units-and-global-variables.html#block-and-transaction-properties).
+There are some predefined variables available to use in any contract. Usually, they provide information related to the blockchain platform. I am going to show a small list of the ones most used, for a complete list [see this](https://solidity.readthedocs.io/en/v0.4.24/units-and-global-variables.html#block-and-transaction-properties).
 * __msg__ - references the current message call (i.e., function call).
     * __msg.sender__ - address, the account or contract that initiated the message call.
     * __msg.value__ - uint, the amount of Wei ( 10^-18 Ether ) sent in this message.
@@ -199,7 +199,7 @@ There are some pre-defined variables available to use in any contract. Usually, 
     * __block.timestamp__ - uint, the timestamp in the current block.
 * __now__ - uint, an alias for block.timestamp.
 
-You should pay attention specially to __msg.sender__, as it is probably the most used pre-defined variable. For example, whoever called the constructor is the "person" creating the contract, and we can store that for security checks later.
+You should pay attention specially to __msg.sender__, as it is probably the most used predefined variable. For example, whoever called the constructor is the "person" creating the contract, and we can store that for security checks later.
 
 ```solidity
 contract C {
@@ -216,20 +216,20 @@ contract C {
 
 The way to handle errors in Solidity is by raising exceptions. An exception undo all changes made in the current execution (propagating to the other function calls). The exception code we can use in our functions are the following:
 * __require( condition, message )__ - raises an exception if the condition is false and returns the message to the caller. This is the code that you should use for most situations. Even though the message is optional, it is good practice to always define it. Otherwise the caller may not know why the exception was raised.
-* __revert( message )__ - raiseas an exception and returns the message to the caller. The message is optinal, but it is a good practice to use it. 
+* __revert( message )__ - raises an exception and returns the message to the caller. The message is optional, but it is a good practice to use it. 
 * __assert( condition )__ - raises an exception if the condition is false. It may look like require but assert should be used for internal checks.
 * __throw__ - deprecated in the current version of Solidity, avoid using it. Throw raises an exception.
 
 
 ### 3.4. Custom Modifiers
 
-In Solidity, we can create custom function modifiers. The ideia is to ammend the semantics of function with reusable code. Mostly used for checking condition and raising exceptions. 
+In Solidity, we can create custom function modifiers. The idea is to amend the semantics of function with reusable code. Mostly used for checking condition and raising exceptions. 
 
-We use the "modifier" keyword to create one. A modifier can have parameters. The placeholder statement ("\_;") indicates where the actual function code will be placed. This allows modifiers to ammend code before or after (or both) of the normal function code.
+We use the "modifier" keyword to create one. A modifier can have parameters. The placeholder statement ("\_;") indicates where the actual function code will be placed. This allows modifiers to amend code before or after (or both) of the normal function code.
 
 ```solidity
 modifier checkBalance(uint amount){
-    require( address(this).balance >= amount, "Insuficient funds for this operation");
+    require( address(this).balance >= amount, "Insufficient funds for this operation");
     _; // <-- Here is where the normal function code will be placed
 }
 
@@ -240,7 +240,7 @@ function foo(uint amount) public payable checkBalance(amount) {
 
 ### 3.5. Restrict Access Contract
 
-Now that we know about constructors, pre-defined variables, and modifiers, I can show an example for a restrict access contract. In this case, we want to restrict the access of certain functions that only the creator (owner) can invoke them. If anyone else calls such functions then an exception should be raised. 
+Now that we know about constructors, predefined variables, and modifiers, I can show an example for a restrict access contract. In this case, we want to restrict the access of certain functions that only the creator (owner) can invoke them. If anyone else calls such functions then an exception should be raised. 
 
 ```solidity
 pragma solidity^0.4.24;
@@ -271,19 +271,19 @@ contract Restricted {
 } //end of contract
 ```
 
-You can deploy the contract using one account and use the "setData" function to modify the dta. After that, change the selected account on the "account combobox" and try calling the function again. You should see an exception in the transactions log and also the message we placed on the require.
+You can deploy the contract using one account and use the "setData" function to modify the data. After that, change the selected account on the "account combo-box" and try calling the function again. You should see an exception in the transactions log and also the message we placed on the require.
 
 ## 4. Dealing with Money (Ether)
 
-One of the major advantages of Smart Contracts is dealing with crypto-currency (in Ethereum always measured in Wei).
+One of the major advantages of Smart Contracts is dealing with cryptocurrency (in Ethereum always measured in Wei).
 
 ### 4.1. Special Code for Money
 
-There are some special syntax and pre-defined functions to handle Ether. Lets revise some of terms and present new ones:
+There are some special syntax and predefined functions to handle Ether. Lets revise some of terms and present new ones:
 
 * __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. When a payable function receives Ether, it automatically adds the sent funds to its contract's. __Please note__ that payable is only required for a function to __receive__ ether. If a function __sends__ it does not need the payable modifier.
 * __address__ - the primitive type address references an account or a contract. We need to typecast a contract to address to use its attributes and functions. 
-    * __\<address>.balance__ - the balance shows how many Ether (measured in Wei) that address have. Useful to check if the address have suficients funds for an operation. __ATTENTION:__ you cannot modify the value of balance but only read it. Balance is always automatically updated by the Ethereum blockchain. 
+    * __\<address>.balance__ - the balance shows how many Ether (measured in Wei) that address have. Useful to check if the address have sufficient funds for an operation. __ATTENTION:__ you cannot modify the value of balance but only read it. Balance is always automatically updated by the Ethereum blockchain. 
     * __\<address>.transfer(uint amount )__ - sends money from the current contract to the address. Raises an exception if failed.
     * __\<address>.send( uint amount )__ - sends money from the current contract to the address. Returns false if failed. 
     * __\<address>.call.value( uint amount)()__ - low level function that calls the address, when used with the value method it also allows you to send money with it. __CAUTION:__ if you are not really sure what you are doing, avoid using call at all costs. This function can leave your contract vulnerable to attacks. Always prefer the safer functions transfer and send.
@@ -364,7 +364,7 @@ The complete code for [Wallet version 3 is here](contracts/wallet3.sol). Now dep
 
 ## 5. (Under development)
 
-Due to time constaints, part 5 will probably not be presented at CBSoft.
+Due to time constraints, part 5 will probably not be presented at CBSoft.
 
 ### 5.1. Complex Types
 
