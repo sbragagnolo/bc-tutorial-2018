@@ -383,7 +383,6 @@ enum States{ OPEN, CLOSED, CANCELED};
 States myState = States.OPEN; 
 ```
 * __array__ - supports fixed sized arrays and also dynamic ones. Example:
-
 ```solidity
 address[] voters; //dynamic sized array
 address[5] supervisors; //fixed sized array
@@ -397,7 +396,6 @@ function addSuper(address s) public {
 ```
 
 * __mapping__ - a mapping is like a hash table where we define the key => value. Not every type can used as key, but any primitive type is safe to use. For the value almost anything can be used. The mapping is virtually initialized in way that every key exists and the value is set to zero (or a byte-representation composed of only zeros). Example: 
-
 ```solidity
 mapping(address=>uint) funds; //maps an address (key) to an unsigned integer (value)
 
@@ -410,3 +408,4 @@ function verifyMyFunds() public view returns(uint) {
 
 
 
+.
