@@ -12,11 +12,16 @@ In this page you can find the materials for the tutorial including slides, lesso
 
 ### Tutorial
 
-- Slides
-- [Exercise: Hands-On Begginers to Solidity](handson.md)
-- Exercise: Solidity Coding Patterns
-- Exercise: Tools for Smart Contract Analysis
-- About me.
+* Slides
+* [Hands On: Begginers to Solidity](begginers1.md)
+* Hands On: Solidity Coding Patterns
+* Hands On: Tools for Smart Contract Analysis 
+
+### About me.
+
+I am Henrique Rocha, a Post-Doctoral researcher in Inria Lille (2017-2019). My current research is devoted to blockchain-oriented software engineering. I contributed to many open source blockchain tools from my blockchain research group at Inria (https://github.com/RMODINRIA-Blockchain). I did my Ph.D. at UFMG in the ASERG group. I also has experience as a college lecturer in private Brazilian institutions.
+* [LinkedIn](https://www.linkedin.com/in/hscrocha/)
+* [Lattes Curriculum](http://lattes.cnpq.br/5387568496741674)
 
 ### Disclaimer
 
