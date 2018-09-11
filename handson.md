@@ -127,9 +127,7 @@ Modifiers affect the behaviour of a resource (e.g., function, attribute). In a f
     ```
     * __constant__ - deprecated for functions but still used for attributes. A constant attribute cannot be modified and we must specify its value at declaration. For example:
     ```solidity
-    function calc(uint a, uint b) public pure returns(uint){
-        return (a+1)*(b+1);
-    }
+    uint public constant version = 1;
     ```    
 * __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. When a payable function receives Ether, it automatically adds the sent funds to its contract's.
 
