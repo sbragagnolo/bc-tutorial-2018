@@ -96,7 +96,29 @@ The primitive types available in Solidity are the following:
 
 The reason for many types to have the option to customize its storage is "cost". Storage and execution in the Ethereum blockchain have transactional costs attached to them. Therefore, optimizing your contract to use less storage when possible will reduce its overall costs for you and its users.
 
+### 2.2. Functions
 
+The "rules" enforced by a smart contract are defined by its functions. A function always starts with a "function" keyword followed by its name. Then we can define the parameters if any. After the parameters, we can specify modifiers to the function. Finaly, we can specify the returned type (or types) of the function.
 
+Solidity supports function overloading (i.e., functions with the same name/id but with different parameters). Just be carefull that some types may resolve as the same paramter when compiled (e.g., a contract in a parameter will be turned into an address).
+
+Another peculiarity of Solidity is that you can return more than one value in a function (I will create an example of that shortly). Unfortunately, not every type can be returned by a function (e.g., structs, dynamic arrays).
+
+### 2.3. Pre-defined Modifiers
+
+Modifiers specify a behaviour that a function implements. The pre-defined modifiers that we can use are the following:
+
+* __Visibility modifiers__ - specifies who can access the resource. Each resource can only have one visibility modifier. Most of them can also be applied to contract's attributes as well. We used the term "visibility" is misleading because the resource (specially contract's attributes) is still visible, just not accessible.
+    * __private__ - only the contract that defined a private resource can access it. __Extreme Caution:__ unlike other programming languages, a private attribute of a smart contract is still visible to anyone in the blockchain. Therefore, do not count on its invisibility to perform any action.
+    * __internal__ - similar to "protected" in C++/Java, the current contract and the ones deriving from it. This is the default visibility if you did not defined one for a contract's attribute.
+    * __public__ - any contract or account can access this resource. If it is an attribute, other contracts can also modify its value. This is the default visibility for functions.
+    * __external__ - only for functions, mostly used when we define an interface to another contract which we don't have the code. 
+* __State Mutability modifiers__ - basically, if you function performs "read-only" on the contract, or does not even use its internal attributes, we can specify it by using mutability modifiers. __This is very important__, since these functions do not modify anything on the blockchain, they will not create a transaction when called. Therefore, there will be no cost when calling such functions.
+    * __view__ - if a function does not modify the internal contract state (i.e., its attributes), and only reads value from it, we can mark it as "view". As an analogy, you can think of "view" as "read-only" functions. Attributes can not be marked with it.
+    * __pure__ - if a function does not modify or even read the internal state, it can be marked as "pure". Attributes cannot be "pure". 
+    * __constant__ - deprecated for functions but still used for attributes. A constant attribute cannot be modified and  
+* __payable__ - if the function is going to receive Ether, then it must be marked with the payable modifier. Otherwise an exception will be thrown. 
+
+### 2.4. Back to the First Contract
 
 
