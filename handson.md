@@ -383,6 +383,7 @@ enum States{ OPEN, CLOSED, CANCELED};
 States myState = States.OPEN; 
 ```
 * __array__ - supports fixed sized arrays and also dynamic ones. Example:
+
 ```solidity
 address[] voters; //dynamic sized array
 address[5] supervisors; //fixed sized array
