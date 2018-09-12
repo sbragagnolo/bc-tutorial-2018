@@ -132,6 +132,30 @@ contract CrowdFund{
 
 # 4. Reentrancy
 
+Reentrancy is the name of a major security flaw in a smart contract. Much like SQL-injection, it is caused by unsecure coding practices. For example, consider the following Bank contract, in this bank people store their Ether.
 
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Ether Bank Unsecured
+ * @author Henrique
+ */
+contract Bank{
+    mapping(address=>uint) private balances;
+    
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;    
+    }
+    
+    function withdraw() public {
+        if(msg.sender.call.value(balances[msg.sender])())
+            balances[msg.sender] = 0;
+    }
+
+    function checkBalance() public view returns(uint){
+        return balances[msg.sender];
+    }
+} //end of contract
+```
 
 
