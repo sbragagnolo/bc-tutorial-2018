@@ -31,7 +31,7 @@ contract Bank {
 
 All information in the blockchain is public and visible to anyone. Therefore, developers must ensure data privacy by themselves. The private visibility prevents others to modify an attribute, but its contents are still visible to anyone in the blockchain. In the above example, anyone would be able to see your clients' sensible information (name, phone, address).
 
-First rule of privacy in the blockchain is to avoid storing sensible information. To make our Bank contract more secure, we are not going to store clients information. We also are going to use the client's blockchain address for control (since it is already a hashed and public information on the blockchain).
+First rule of privacy in the blockchain is to avoid storing sensible information. To make our Bank contract more secure, we are not going to store clients information. We also are going to use the client's blockchain address for control (since it is already a hashed and public information on the blockchain). 
 
 ```solidity
 pragma solidity^0.4.24;
@@ -51,8 +51,8 @@ contract Bank {
         clients[clientAddress] = Client(clientAddress,0);
     }
      
-    function deposit(uint id) public { }
-    function withdraw(uint id, uint amount) public { }
+    function deposit() public { }
+    function withdraw(uint amount) public { }
 } //end of contract
 ```
 
