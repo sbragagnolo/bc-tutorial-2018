@@ -76,6 +76,7 @@ For example, let's code a cryptocurrency Crowdfund contract. The states are very
 pragma solidity^0.4.24;
 /**
  * @title Crowdfunding contract  
+ * @author Henrique
  */ 
 contract CrowdFund{
     enum State { Open, Refund, Closed }
