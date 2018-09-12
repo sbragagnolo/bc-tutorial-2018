@@ -39,7 +39,7 @@ Now, I recommend paying special attention to the right part, here is where most 
 * The environment combo-box for this tutorial should be JavaScript VM. That is a simulation of an Ethereum blockchain. The other environment options allow to actually connect to Ethereum. 
 * The accounts will have some pre-generated user accounts, each with 100 Ether on it (on the JavaScript VM environment). We will need accounts to deploy and interact with contracts. The selected account in this combo-box will be the one that is "executing" the operations. 
 * The gas limit is how much gas we are sending when we execute the next transaction. For more information on gas check [this](https://solidity.readthedocs.io/en/v0.4.24/introduction-to-smart-contracts.html?limit#gas).
-* Value is how much cryptocurrency the selected account will send when we execute the next transaction. The usually unit is Wei (1 Ether = 10^18 Wei ), but we can change the unit on the left combo-box of value.
+* Value is how much cryptocurrency the selected account will send when we execute the next transaction. The usual unit is Wei (1 Ether = 10^18 Wei ), but we can change the unit on the left combo-box of value.
 * The next combo-box will have the available contracts on this source code that compile without errors. 
 * The deploy bottom will deploy one instance of the selected contract (on the above combo-box).
 * The next textfield is used to load a contract instance that was previously deployed. The specified address will be "type-casted" as the selected contract on the above combo-box.
