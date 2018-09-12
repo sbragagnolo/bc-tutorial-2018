@@ -152,7 +152,7 @@ function f() public pure returns(uint, string, int){
 
 ### 2.4. Reference to (this)
 
-In Solidity, the keyword ```this``` is a reference to the current contract. We can use "this" to access contracts' functions, but that is optional. However, unlike other programming languages, we cannot use "this" to access attributes. For example, the code below :
+In Solidity, the keyword ```this``` is a reference to the current contract. Optionally, we can use "this" to access contracts' functions. However, unlike other programming languages, we cannot use "this" to access attributes. For example, the code below (adapted from our previous contract) will not compile because we are trying to use "this" to access the attribute "name".
 ```solidity
 function setName(string _name) public{
     this.name = _name; //<-- Error. Does NOT compile. 
