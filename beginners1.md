@@ -4,6 +4,8 @@ In this section, I will present some hands-on coding exercises for coding smart 
 
 ## 1. Starting out
 
+In this section, I present a very simple and gentle start to Solidity.
+
 ### 1.1. What is Solidity
 
 Solidity is high-level language to code smart contracts in the Ethereum platform. Solidity is a statically typed language inspired by C++, JavaScript, and Python. It supports multiple inheritance, user defined types (e.g., structs, enums), and it even has some "syntactic sugar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in depth language description.
@@ -85,7 +87,9 @@ You can now have fun and execute the contract's functions. See how every functio
 
 Congratulations, you just finished your first contract and interaction with the blockchain.
 
-## 2. Basic Concepts
+## 2. Basic Concepts part 1
+
+If you saw Section 1, then you are probably a little more accustomed to the IDE and the platform. Now, I present some basic concepts to Solidity.
 
 ### 2.1. Primitive Types
 
@@ -176,7 +180,9 @@ contract SimpleContract {
 
 Try out changing the visibility modifiers on the "data" attribute and deploying the contract again. The new function I created was to show returning multiple parameters.
 
-## 3. X
+## 3. Basic Concepts part 2
+
+In this section, I continue with hands-on lessons on the basic concepts of Solidity.
 
 ### 3.1. Constructor
 
@@ -275,7 +281,7 @@ You can deploy the contract using one account and use the "setData" function to 
 
 ## 4. Dealing with Money (Ether)
 
-One of the major advantages of Smart Contracts is dealing with cryptocurrency (in Ethereum always measured in Wei).
+One of the major advantages of smart contracts is dealing with cryptocurrency (in Ethereum always measured in Wei). This section focused only on coding Solidity contracts that interact with Ether.
 
 ### 4.1. Special Code for Money
 
@@ -364,7 +370,7 @@ The complete code for [Wallet version 3 is here](contracts/wallet3.sol). Now dep
 
 ## 5. (Under development)
 
-Due to time constraints, part 5 will probably not be presented at CBSoft.
+Due to time constraints, Section 5 will probably not be presented at CBSoft.
 
 ### 5.1. Complex Types
 
