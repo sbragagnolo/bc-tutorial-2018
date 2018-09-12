@@ -1,6 +1,6 @@
 # Hands-on: Beginners to Solidity
 
-In this section, I will present some hands-on coding exercises for coding smart contracts in Solidity. I will also explain some of the basic concepts of the Solidity language before each exercise.
+In this material, I present some hands-on coding for coding smart contracts in Solidity. I will also explain some of the basic concepts of the Solidity language before coding.
 
 ## 1. Starting out
 
@@ -150,7 +150,19 @@ function f() public pure returns(uint, string, int){
 }
 ```
 
-### 2.4. Back to the First Contract
+### 2.4. Reference to (this)
+
+In Solidity, the keyword ```this``` is a reference to the current contract. We can use "this" to access contracts' functions, but that is optional. However, unlike other programming languages, we cannot use "this" to access attributes. For example, the code below :
+```solidity
+function setName(string _name) public{
+    this.name = _name; //<-- Error. Does NOT compile. 
+}
+```
+
+Another important usage of "this" is to acquire the current contract's address. In the current version of Solidity, we need to cast "this" to address as follows: ```address(this)```.
+
+
+### 2.5. Back to the First Contract
 
 Lets go back to our first contract. The warnings showed by Remix is related to missing modifiers, you can probably fix them by now. Now we change the contract a little to use more of the concepts I just presented.
 
