@@ -233,9 +233,9 @@ contract Bank{
     }
     
     function withdraw() public {
-        uint user_balance = balances[msg.sender];
-        balances[msg.sender] = 0;
-        msg.sender.call.value(balances[msg.sender])();
+        uint user_balance = balances[msg.sender]; //check the balance
+        balances[msg.sender] = 0; //update the variable before external call
+        msg.sender.call.value(user_balance)(); //Now do the call
         //Better to use transfer as shown in the line below, but even with call is safe
         //msg.sender.transfer( user_balance );
     }
