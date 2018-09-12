@@ -62,7 +62,7 @@ The most used practice to ensure data privacy is to Hash the information. A hash
 
 At first glance random number generation may not seem like a problem. However, it is very tricky to create a truly random number in Solidity (if you don’t want people to cheat). 
 
-Miners have access to many environment variables (e.g., timestamp, blockhash) and also the contract's internal state before executing your contract. Moreover, a miner can (and probably will) manipulate some of the environmnet variables to get an advantage. Therefore, we should not rely on these variable to generate random numbers. 
+Miners have access to many environment variables (e.g., timestamp, blockhash) and also the contract's internal state before executing your contract. Moreover, a miner can (and probably will) manipulate some of the environmnet variables to get an advantage. Therefore, we should not rely on these variables (like timestamp) to generate random numbers. 
 
 There are many Random number generation patterns for Solidity. Each pattern varies a lot depending on the requirements and usage of the random numbers. Thus, I will not present any, I just want to reinforce the caution. Here is a [link](https://medium.com/@promentol/lottery-smart-contract-can-we-generate-random-numbers-in-solidity-4f586a152b27) to discussing a Lotery smart contract and random generation. 
 
