@@ -68,5 +68,70 @@ There are many Random number generation patterns for Solidity. Each pattern vari
 
 ## 3. State Machine
 
+A common pattern in contracts is to make then act as a state machine. We use an ```enum``` to define the states, and an attribute to control which state the contract is currently in. A function can change the contract state into a different one. Moreover, some functions can become unavailble (or behave differntly) depending on which state the contract is.
+
+For example, let's code a cryptocurrency Crowdfund contract. The states are very simple, when we create the contract the crowdfund is "Open". The contract can only receive pledges when it is "Open". After its expiration, if the total money raised equals or exceeds the minimum required, then the contract is "Closed" and the money is given to the person who created the crowdfund. Otherwise, the contract goes to a "refund" state, and everyone who contributed can ask for their refund. 
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Crowdfunding contract  
+ */ 
+contract CrowdFund{
+    enum State { Open, Refund, Closed }
+    address private owner;
+    uint totalraised;
+    string fundUrl;
+    mapping (address=>uint) pledges;
+    uint minimumRequired;
+    uint expiration; //in days
+    State currentState;
+    
+    constructor(string url, uint min, uint exp) public {
+        owner = msg.sender;
+        currentState = State.Open;
+        fundUrl = url;
+        minimumRequired = min;
+        expiration = now + (exp * 1 days);
+    }
+    
+    function contribute() public payable{
+        checkExpiration();
+        require(currentState == State.Open,"Cannot contribute to an expired Crowdfund.");
+        pledges[msg.sender] = msg.value;
+        totalraised += msg.value;
+    }
+    
+    function refund() public {
+        require(currentState == State.Refund,"Crowfund is not refunding yet.");
+        uint amount = pledges[msg.sender]; 
+        pledges[msg.sender]=0;
+        msg.sender.transfer(amount);
+    }
+    
+    function checkExpiration() public {
+        require(currentState == State.Open,"Contract is already expired");
+        if(now >= expiration){
+            if(totalraised >= minimumRequired){
+                currentState = State.Closed;
+                getFunds();
+            }
+            else{
+                currentState = State.Refund;
+            }
+        }
+    }
+    
+    function getFunds() public {
+        require(owner == msg.sender,"Only owner can get the funds.");
+        require(currentState == State.Closed,"Crowdfund is not closed yet.");
+        owner.transfer( address(this).balance );
+    }   
+} //end of contract
+```
+
+# 4. Reentrancy
+
+
 
 
