@@ -2,7 +2,7 @@
 
 In this material, I focused on coding patterns for Solidity. Due to the blockchain environment, some common programming practices for other languages may not be suited for a secure smart contract.
 
-### 1.1. Privacy
+## 1. Privacy
 
 Privacy is a big issue in the blockchain platforms, and common programming practices may not protect our information the way we are used to. Let's use for example a Bank contract (this bank could store tokens or Ether, for the coding example it does not matter).
 
@@ -57,6 +57,16 @@ contract Bank {
 ```
 
 The most used practice to ensure data privacy is to Hash the information. A hash will have no meaning to anyone looking at. However, if we need the original data, we can use a secondary private database linking to the hash. 
+
+## 2. Random Generation
+
+At first glance random number generation may not seem like a problem. However, it is very tricky to create a truly random number in Solidity (if you don’t want people to cheat). 
+
+Miners have access to many environment variables (e.g., timestamp, blockhash) and also the contract's internal state before executing your contract. Moreover, a miner can (and probably will) manipulate some of the environmnet variables to get an advantage. Therefore, we should not rely on these variable to generate random numbers. 
+
+There are many Random number generation patterns for Solidity. Each pattern varies a lot depending on the requirements and usage of the random numbers. Thus, I will not present any, I just want to reinforce the caution. Here is a [link](https://medium.com/@promentol/lottery-smart-contract-can-we-generate-random-numbers-in-solidity-4f586a152b27) to discussing a Lotery smart contract and random generation. 
+
+## 3. State Machine
 
 
 
