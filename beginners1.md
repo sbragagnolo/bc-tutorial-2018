@@ -424,7 +424,6 @@ function verifyMyFunds() public view returns(uint) {
 ```
 * __contract__ - we can also use other contracts inside one. We go into more details on that soon.
 
+# 
 
-
-
-.
+[ << Back to Home](README.md)
