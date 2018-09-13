@@ -14,7 +14,7 @@ One of the analysis tools we have developed is a Visualization for smart contrac
 
 First, we need to install SmaCC on your Pharo image. Run the following code in a playground screen:
 
-```pharo
+```smalltalk
 Metacello new
     baseline: 'SmaCC';
     repository: 'github://SmaCCRefactoring/SmaCC';
@@ -22,15 +22,18 @@ Metacello new
 ```
 
 Now, you can get the visualization tool by running the following code on a playground:
-```pharo
+```smalltalk
 Metacello new
     baseline: 'SolVis';
     repository: 'github://hscrocha/SolVis';
     load.
 ```
 
-The Solidity smart contract visualization tool is now installed in your image. Do a click on the main Pharo window to open the menu, you will see a new option there called XX.
+The Solidity smart contract visualization tool is now installed in your image. Do a click on the main Pharo window to open the menu, you will see a new option there called "Solidity".
 
 ![Pharo SolVis](/images/pharo-solvis.png).
+
+In the "Solidity" menu, you should select "Set Database Path" to set up a folder in your local computer to place contracts. After setting it up, you can chose the menu "Open Database" to select a contract file to visualize. As an example we are using this file which contains the [TokenERC20 standard](contracts/ERC20Token.sol).
+
 
 
