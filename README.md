@@ -15,7 +15,7 @@ In this page, you can find the materials for the tutorial including slides, less
 * Slides
 * [Hands-On: Beginners to Solidity](beginners1.md)
 * [Hands-On: Solidity Coding Patterns](patterns1.md)
-* Hands-On: Tools for Smart Contract Analysis 
+* [Hands-On: Pharo Tools for Smart Contract Analysis](tools1.md)
 
 ### About me.
 
