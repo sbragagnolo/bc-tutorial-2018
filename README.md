@@ -25,6 +25,6 @@ I am Henrique Rocha, a Post-Doctoral researcher in Inria Lille (2017-2019). My c
 
 ### Disclaimer
 
-This is tutorial made from my personal experiences and knowledge on the topic. The intent on this material is for personal usage. I am not responsible for any issues, problems, or etc., if my code examples are used outside the simulation environment.
+This is a tutorial made from my personal experiences and knowledge on the topic. The intent on this material is for personal usage. I am not responsible for any issues, problems, or etc., if my code examples are used (or misued) outside the simulation environment.
 
 Permission is granted to use my material as long as you reference its source (this repository) and give me credit for my work.
