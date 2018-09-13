@@ -31,6 +31,6 @@ Metacello new
 
 The Solidity smart contract visualization tool is now installed in your image. Do a click on the main Pharo window to open the menu, you will see a new option there called XX.
 
-![images/pharo-solvis.png]
+![Pharo SolVis](/images/pharo-solvis.png).
 
 
