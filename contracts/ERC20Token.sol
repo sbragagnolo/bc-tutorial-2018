@@ -66,14 +66,6 @@ contract StandardToken is Token {
             return true;
         } else { return false; }
     }
-    
-    function distributeToken(address[] addresses, uint256 _value) {
-     for (uint i = 0; i < addresses.length; i++) {
-         balances[msg.sender] -= _value;
-         balances[addresses[i]] += _value;
-         Transfer(msg.sender, addresses[i], _value);
-     }
-}
 
     function balanceOf(address _owner) constant returns (uint256 balance) {
         return balances[_owner];
@@ -88,7 +80,7 @@ contract StandardToken is Token {
     function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
       return allowed[_owner][_spender];
     }
-    
+
     mapping (address => uint256) balances;
     mapping (address => mapping (address => uint256)) allowed;
     uint256 public totalSupply;
@@ -124,11 +116,11 @@ contract ERC20Token is StandardToken {
 
     function ERC20Token(
         ) {
-        totalSupply = 12 * 10 ** 24;
-        balances[msg.sender] = totalSupply;               // Give the creator all initial tokens (100000 for example)
-        name = "EETHER";                                   // Set the name for display purposes
-        decimals = 18;                            // Amount of decimals for display purposes
-        symbol = "EETHER";                               // Set the symbol for display purposes
+        balances[msg.sender] = 10000000000000;               // Give the creator all initial tokens (100000 for example)
+        totalSupply = 10000000000000;                        // Update total supply (100000 for example)
+        name = "VENTURE";                                   // Set the name for display purposes
+        decimals = 5;                            // Amount of decimals for display purposes
+        symbol = "VENT";                               // Set the symbol for display purposes
     }
 
     /* Approves and then calls the receiving contract */
@@ -141,6 +133,5 @@ contract ERC20Token is StandardToken {
         //it is assumed that when does this that the call *should* succeed, otherwise one would use vanilla approve instead.
         if(!_spender.call(bytes4(bytes32(sha3("receiveApproval(address,uint256,address,bytes)"))), msg.sender, _value, this, _extraData)) { throw; }
         return true;
-        
     }
 }
