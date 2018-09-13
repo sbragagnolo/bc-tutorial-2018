@@ -56,7 +56,15 @@ contract Bank {
 } //end of contract
 ```
 
-The most used practice to ensure data privacy is to Hash the information. A hash will have no meaning to anyone looking at. However, if we need the original data, we can use a secondary private database linking to the hash. 
+The most used practice to ensure data privacy is to Hash the information. A hash will have no meaning to anyone looking at, but for the developer is easy to verify. Bellow there is a code snippet of hashing a number and the user's address (ideally this should be done offline outside the blockchain)
+
+```solidity
+function encode(uint number) public view returns (bytes32){
+    return keccak256(abi.encodePacked(number, msg.sender));
+}
+```
+
+Another used practice is to have a secondary private database for sensible information, and storing the hash in the private db and using such hash in the blockchain (that way it is easier to find the information in your private db and link with the blockchain data). 
 
 ## 2. Random Generation
 
