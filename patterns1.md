@@ -86,11 +86,10 @@ contract CrowdFund{
     mapping (address=>uint) pledges;
     uint minimumRequired;
     uint expiration; //in days
-    State currentState;
+    State currentState = State.Open;
     
     constructor(string url, uint min, uint exp) public {
         owner = msg.sender;
-        currentState = State.Open;
         fundUrl = url;
         minimumRequired = min;
         expiration = now + (exp * 1 days);
@@ -131,7 +130,7 @@ contract CrowdFund{
 } //end of contract
 ```
 
-# 4. Reentrancy
+## 4. Reentrancy
 
 Reentrancy is the name of a major security flaw in a smart contract. Much like SQL-injection, it is caused by unsecure coding practices. For example, consider the following Bank contract, in this bank people store their Ether.
 
@@ -208,6 +207,12 @@ contract ExploitReentrancy{
             bank.withdraw();
         }
     }
+} //end of contract
+
+interface Bank{ //interface to use bank functions
+    function deposit() external payable ;
+    function withdraw() external;
+    function checkBalance() external view returns(uint);
 }
 ```
 
@@ -249,5 +254,128 @@ contract Bank{
     }
 } //end of contract
 ```
+
+## 5. Withdraw Pattern
+
+Even if we protect our contract against reentrancy, someone can still try to take advantage on it. Consider the following Auction contract, and try to see the flaw on it.
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Auction Unsafe
+ * @author Henrique
+ */
+contract Auction {
+    address owner;
+    address winner;
+    uint winning_bid;
+
+    enum State{ Accepting_Bids, Auction_Closed }
+    State private state = State.Accepting_Bids;
+
+    constructor() public {
+        owner = msg.sender;
+        winning_bid = 0;
+        winner = owner;
+    }
+    
+    function bid() public payable{
+        require(state == State.Accepting_Bids, "Auction closed.");
+        require(msg.value > winning_bid,"Invalid bid."); //check
+        //effects
+        address oldwinner = winner;
+        uint oldbid = winning_bid;
+        winner = msg.sender;
+        winning_bid = msg.value;
+        //interactions
+        oldwinner.transfer( oldbid );
+    }
+    
+    function closeAuction() public{
+        require(owner == msg.sender,"Only owner can close the auction.");
+        require(state == State.Accepting_Bids,"Auction already closed.");
+        state = State.Auction_Closed;
+        owner.transfer( winning_bid );
+    }
+} //end of contract
+```
+
+Can you identify the problem? This one is more tricky than the reentrancy flaw. The potential problem that an attacker can exploit is on the "bid" function. Please note that "bid" is reentrancy safe, as we used the checks-effects-interactions pattern.
+
+Seems counter-intuitive but sending funds right after an effect may not be the best way. There is the potential risk for an attacker to cause the transfer to fail on purpose and keep the contract from ever performing its function. In the last example, it would be impossible to “out-bid” the attacker (causing him to win the auction). Here is very simple contract an attacker could use.
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Exploiting Unsafe Auction contract
+ * @author Henrique
+ */
+contract ExploitAuction {
+    
+    function makeMyBid(address auction_address) public payable {
+        Auction auction = Auction(auction_address);
+        auction.bid.value(msg.value)();
+    }
+    
+    function() public payable{
+        revert(); //always raise an exception
+    }
+}
+
+interface Auction{ //interface to use the functions on Auction
+    function bid() external payable;
+}
+```
+
+The function "makeMyBid" calls the "bid" on the Auction contract. When someone else tries to outbid the attacker on the Auction contract, the transfer (last line on the "bid" function) will trigger the fallback function on the ExpoitAuction contract. The fallback will raise an exception which will propagate to the bid and undo all changes. Therefore, noone would be able to outbid the attacker.
+
+Use the “Withdraw pattern” to avoid this risk. The pattern is to make each account responsible to withdraw his own funds. In this case, the responsibility to get back their losing bids is delegated to the accounts, which will have to call another function to that. The contract bellow implements an Auction with the this pattern.
+
+```solidity
+pragma solidity^0.4.24;
+/**
+ * @title Auction State Machine
+ * @author Henrique
+ */
+contract Auction {
+    address owner;
+    address winner;
+    uint winning_bid;
+    mapping(address=>uint) losing_bids;
+
+    enum State{ Accepting_Bids, Auction_Closed }
+    State private state = State.Accepting_Bids;
+    
+    constructor() public {
+        owner = msg.sender;
+        winning_bid = 0;
+        winner = owner;
+    }
+    
+    function bid() public payable{
+        require(state == State.Accepting_Bids, "Auction closed.");
+        require(msg.value > winning_bid,"Invalid bid.");
+    
+        losing_bids[winner] += winning_bid;
+        winner = msg.sender;
+        winning_bid = msg.value;
+    }
+    
+    function withdraw() public {
+        uint lost_bids = losing_bids[msg.sender];
+        losing_bids[msg.sender] = 0;
+        msg.sender.transfer( lost_bids );
+    }
+    
+    function closeAuction() public {
+        require(owner == msg.sender,"Only owner can close the auction.");
+        require(state == State.Accepting_Bids,"Auction already closed.");
+        state = State.Auction_Closed;
+        owner.transfer( winning_bid );
+    }
+} //end of contract
+```
+
+
 
 
