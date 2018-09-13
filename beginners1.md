@@ -415,6 +415,7 @@ function addSuper(address s) public {
 ```
 
 * __mapping__ - a mapping is like a hash table where we define the key => value. Not every type can be used as key, but any primitive type is safe to use. For the value, almost anything can be used. The mapping is virtually initialized in a way that every key exists and the value is set to zero (or a byte-representation composed of only zeros). Example: 
+
 ```solidity
 mapping(address=>uint) funds; //maps an address (key) to an unsigned integer (value)
 
