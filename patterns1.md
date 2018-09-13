@@ -31,7 +31,7 @@ contract Bank {
 
 All information in the blockchain is public and visible to anyone. Therefore, developers must ensure data privacy by themselves. The private visibility prevents others to modify an attribute, but its contents are still visible to anyone in the blockchain. In the above example, anyone would be able to see your clients' sensible information (name, phone, address).
 
-First rule of privacy in the blockchain is to avoid storing sensible information. To make our Bank contract more secure, we are not going to store clients information. We also are going to use the client's blockchain address for control (since it is already a hashed and public information on the blockchain). 
+The first rule of privacy in the blockchain is to avoid storing sensible information. To make our Bank contract more secure, we are not going to store clients information. We also are going to use the client's blockchain address for control (since it is already hashed and public information on the blockchain). 
 
 ```solidity
 pragma solidity^0.4.24;
@@ -56,7 +56,7 @@ contract Bank {
 } //end of contract
 ```
 
-The most used practice to ensure data privacy is to Hash the information. A hash will have no meaning to anyone looking at, but for the developer is easy to verify. Bellow there is a code snippet of hashing a number and the user's address (ideally this should be done offline outside the blockchain)
+The most used practice to ensure data privacy is to Hash the information. A hash will have no meaning to anyone looking at, but for the developer is easy to verify. Bellow, there is a code snippet of hashing a number and the user's address (ideally this should be done offline outside the blockchain)
 
 ```solidity
 function encode(uint number) public view returns (bytes32){
@@ -64,21 +64,21 @@ function encode(uint number) public view returns (bytes32){
 }
 ```
 
-Another used practice is to have a secondary private database for sensible information, and storing the hash in the private db and using such hash in the blockchain (that way it is easier to find the information in your private db and link with the blockchain data). 
+Another used practice is to have a secondary private database for sensible information, and storing the hash in the private DB and using such hash in the blockchain (that way it is easier to find the information in your private DB and link with the blockchain data). 
 
 ## 2. Random Generation
 
-At first glance random number generation may not seem like a problem. However, it is very tricky to create a truly random number in Solidity (if you don’t want people to cheat). 
+At first glance, random number generation may not seem like a problem. However, it is very tricky to create a truly random number in Solidity (if you don’t want people to cheat). 
 
-Miners have access to many environment variables (e.g., timestamp, blockhash) and also the contract's internal state before executing your contract. Moreover, a miner can (and probably will) manipulate some of the environmnet variables to get an advantage. Therefore, we should not rely on these variables (like timestamp) to generate random numbers. 
+Miners have access to any environment variables (e.g., timestamp, blockhash) and also the contract's internal state before executing your contract. Moreover, a miner can (and probably will) manipulate some of the environment variables to get an advantage. Therefore, we should not rely on these variables (like a timestamp) to generate random numbers. 
 
-There are many Random number generation patterns for Solidity. Each pattern varies a lot depending on the requirements and usage of the random numbers. Thus, I will not present any, I just want to reinforce the caution. Here is a [link](https://medium.com/@promentol/lottery-smart-contract-can-we-generate-random-numbers-in-solidity-4f586a152b27) to discussing a Lotery smart contract and random generation. 
+There are many Random number generation patterns for Solidity. Each pattern varies a lot depending on the requirements and usage of the random numbers. Thus, I will not present any, I just want to reinforce the caution. Here is a [link](https://medium.com/@promentol/lottery-smart-contract-can-we-generate-random-numbers-in-solidity-4f586a152b27) to discussing a Lottery smart contract and random generation. 
 
 ## 3. State Machine
 
-A common pattern in contracts is to make then act as a state machine. We use an ```enum``` to define the states, and an attribute to control which state the contract is currently in. A function can change the contract state into a different one. Moreover, some functions can become unavailble (or behave differntly) depending on which state the contract is.
+A common pattern in contracts is to make then act as a state machine. We use an ```enum``` to define the states, and an attribute to control which state the contract is currently in. A function can change the contract state into a different one. Moreover, some functions can become unavailable (or behave differently) depending on which state the contract is.
 
-For example, let's code a cryptocurrency Crowdfund contract. The states are very simple, when we create the contract the crowdfund is "Open". The contract can only receive pledges when it is "Open". After its expiration, if the total money raised equals or exceeds the minimum required, then the contract is "Closed" and the money is given to the person who created the crowdfund. Otherwise, the contract goes to a "refund" state, and everyone who contributed can ask for their refund. 
+For example, let's code a cryptocurrency Crowdfund contract. The states are very simple, when we create the contract the crowdfunding is "Open". The contract can only receive pledges when it is "Open". After its expiration, if the total money raised equals or exceeds the minimum required, then the contract is "Closed" and the money is given to the person who created the crowdfund. Otherwise, the contract goes to a "refund" state, and everyone who contributed can ask for their refund. 
 
 ```solidity
 pragma solidity^0.4.24;
@@ -140,7 +140,7 @@ contract CrowdFund{
 
 ## 4. Reentrancy
 
-Reentrancy is the name of a major security flaw in a smart contract. Much like SQL-injection, it is caused by unsecure coding practices. For example, consider the following Bank contract, in this bank people store their Ether.
+Reentrancy is the name of a major security flaw in a smart contract. Much like SQL-injection, it is caused by insecure coding practices. For example, consider the following Bank contract, in this bank people store their Ether.
 
 ```solidity
 pragma solidity^0.4.24;
@@ -174,7 +174,7 @@ Can you identify the problem in the above contract? Don't worry if you cannot, i
 
 Any call to another address hands the control to that address. This includes any transfer of Ether. If the address is an account, nothing can happen. __However__, if the address is another contract (receiver) it can execute any code before giving back the control to the original contract. The receiver can even call the original contract again before the current function execution is resolved, therein lies the problem. 
 
-When we use "transfer" or "send", reentrancy is not serious because these functions have a gas limition that prohibits the receiver to execute anything other than log one event. Using "call" is a different story. In the last example, we could drain all Ether from the contract by using the contract bellow.
+When we use "transfer" or "send", reentrancy is not serious because these functions have a gas limitation that prohibits the receiver to execute anything other than log one event. Using "call" is a different story. In the last example, we could drain all Ether from the contract by using the contract below.
 
 ```solidity
 pragma solidity^0.4.24;
@@ -224,13 +224,13 @@ interface Bank{ //interface to use bank functions
 }
 ```
 
-The security issue happens in the "exploit" and fallback functions. The remaining functions are to just for set-up. In this case, the contract ExploitReentracy becames one of the Bank clients and deposits something. When we call the "exploit" function, the contract performs a bank withdraw. The withdraw function will send the funds from the Bank to ExploitReentrancy, which will trigger the execution of the fallback function before the Bank has a chance to update the balance on this address. Therefore, in the fallback we just call withdraw again, and the Bank will send our funds again and trigger another execution of the fallaback function. This will go on until we drain all Ether from the bank.
+The security issue happens in the "exploit" and fallback functions. The remaining functions are to just for set-up. In this case, the contract ExploitReentracy becomes one of the Bank clients and deposits something. When we call the "exploit" function, the contract performs a bank withdraw. The withdraw function will send the funds from the Bank to ExploitReentrancy, which will trigger the execution of the fallback function before the Bank has a chance to update the balance on this address. Therefore, in the fallback, we just call withdraw again, and the Bank will send our funds again and trigger another execution of the fallback function. This will go on until we drain all Ether from the bank.
 
-In fact, the infamous DAO attack that drained approximately 50 million dollars worth of cruptocurrency was caused by a Reentrancy flaw. The attacker probably used a contract similar to one I presented.
+In fact, the infamous DAO attack that drained approximately 50 million dollars worth of cryptocurrency was caused by a Reentrancy flaw. The attacker probably used a contract similar to the one I presented.
 
-How can we avoid a reentrancy flaw? There is simple pattern that should always be used when calling external address. Always update the internal contract state before calling external functions (also called checks-effects-interactions pattern). Another important note is to use "transfer" or "send" instead of "call" (both transfer and send are safer by design).
+How can we avoid a reentrancy flaw? There is a simple pattern that should always be used when calling an external address. Always update the internal contract state before calling external functions (also called checks-effects-interactions pattern). Another important note is to use "transfer" or "send" instead of "call" (both transfer and send are safer by design).
 
-For example the Bank contract bellow would not be affected by reentrancy. See that we are not forbidden someone to call the original contract again, but an attacker would not gain any benefit from doing so.
+For example, the Bank contract bellow would not be affected by reentrancy. See that we are not forbidden someone to call the original contract again, but an attacker would not gain any benefit from doing so.
 
 ```solidity
 pragma solidity^0.4.24;
@@ -310,7 +310,7 @@ contract Auction {
 
 Can you identify the problem? This one is more tricky than the reentrancy flaw. The potential problem that an attacker can exploit is on the "bid" function. Please note that "bid" is reentrancy safe, as we used the checks-effects-interactions pattern.
 
-Seems counter-intuitive but sending funds right after an effect may not be the best way. There is the potential risk for an attacker to cause the transfer to fail on purpose and keep the contract from ever performing its function. In the last example, it would be impossible to “out-bid” the attacker (causing him to win the auction). Here is very simple contract an attacker could use.
+Seems counter-intuitive but sending funds right after an effect may not be the best way. There is the potential risk for an attacker to cause the transfer to fail on purpose and keep the contract from ever performing its function. In the last example, it would be impossible to “out-bid” the attacker (causing him to win the auction). Here is a very simple contract an attacker could use.
 
 ```solidity
 pragma solidity^0.4.24;
@@ -335,9 +335,9 @@ interface Auction{ //interface to use the functions on Auction
 }
 ```
 
-The function "makeMyBid" calls the "bid" on the Auction contract. When someone else tries to outbid the attacker on the Auction contract, the transfer (last line on the "bid" function) will trigger the fallback function on the ExpoitAuction contract. The fallback will raise an exception which will propagate to the bid and undo all changes. Therefore, noone would be able to outbid the attacker.
+The function "makeMyBid" calls the "bid" on the Auction contract. When someone else tries to outbid the attacker on the Auction contract, the transfer (last line on the "bid" function) will trigger the fallback function on the ExpoitAuction contract. The fallback will raise an exception which will propagate to the bid and undo all changes. Therefore, no one would be able to outbid the attacker.
 
-Use the “Withdraw pattern” to avoid this risk. The pattern is to make each account responsible to withdraw his own funds. In this case, the responsibility to get back their losing bids is delegated to the accounts, which will have to call another function to that. The contract bellow implements an Auction with the this pattern.
+Use the “Withdraw pattern” to avoid this risk. The pattern is to make each account responsible to withdraw his own funds. In this case, the responsibility to get back their losing bids is delegated to the accounts, which will have to call another function to that. The contract bellow implements an Auction with this pattern.
 
 ```solidity
 pragma solidity^0.4.24;
@@ -383,7 +383,5 @@ contract Auction {
     }
 } //end of contract
 ```
-
-
 
 
