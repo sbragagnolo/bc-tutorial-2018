@@ -42,3 +42,6 @@ In the "Solidity" menu, you should select "Set Database Path" to set up a folder
 
 (Under Construction)
 
+# 
+
+[ << Back to Home](README.md)
