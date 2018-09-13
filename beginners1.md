@@ -10,7 +10,7 @@ In this section, I present a very simple and gentle start to Solidity.
 
 Solidity is high-level language to code smart contracts in the Ethereum platform. Solidity is a statically typed language inspired by C++, JavaScript, and Python. It supports multiple inheritance, user-defined types (e.g., structs, enums), and it even has some "syntactic sugar" for other features. Please, consult the [Solidity Documentation](https://solidity.readthedocs.io/en/latest/) for a more in-depth language description.
 
-Most of the language commands resemble JavaScript, for example, the code sniped bellow show a simple usage of a "for" and an "if-else" statements.
+Most of the language commands resemble C++, for example, the code sniped bellow show a simple usage of a "for" and an "if-else" statements.
 ```solidity
 for(int i=0; i<10; i++){
     if( i%2 == 0 ){
