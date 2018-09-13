@@ -8,7 +8,7 @@ In this material, I will present tools coded in Pharo Smalltalk for smart contra
 
 For this tutorial, you wont need to know how to code in Pharo. I will give all code and instructions to execute the tools. Just remember that Pharo is an image based system (a very rough analogy would be docker images) instead of file based.
 
-## 2. Visualization
+## 2. Visualization: SolVis
 
 One of the analysis tools we have developed is a Visualization for smart contracts. We are still working on improving the visualization approach, and if you want help please answer this [academic survey]().
 
@@ -36,4 +36,8 @@ The Solidity smart contract visualization tool is now installed in your image. D
 In the "Solidity" menu, you should select "Set Database Path" to set up a folder in your local computer to place contracts. After setting it up, you can chose the menu "Open Database" to select a contract file to visualize. As an example we are using this file which contains the [TokenERC20 standard](contracts/ERC20Token.sol). That contract visualization is shown below.
 
 <img src="/images/pharo-solvis-contract-erc.png" width="400px" alt="Pharo Solvis ERC20" />
+
+## 3. Smart Metrics
+
+(Under Construction)
 
