@@ -35,5 +35,5 @@ The Solidity smart contract visualization tool is now installed in your image. D
 
 In the "Solidity" menu, you should select "Set Database Path" to set up a folder in your local computer to place contracts. After setting it up, you can chose the menu "Open Database" to select a contract file to visualize. As an example we are using this file which contains the [TokenERC20 standard](contracts/ERC20Token.sol). That contract visualization is shown below.
 
-<img src="/images/pharo-solvis-contract-erc.png" width="300px" alt="Pharo Solvis ERC20" />
+<img src="/images/pharo-solvis-contract-erc.png" width="400px" alt="Pharo Solvis ERC20" />
 
