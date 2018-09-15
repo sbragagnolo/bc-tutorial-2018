@@ -13,10 +13,10 @@ In this page, you can find the materials for the tutorial including slides, less
 ### Tutorial
 
 * Slides:
-  * Tutorial Presentation part 1 ([pdf](2018_cbsoft_blockchain-crash-course.pdf) | [keynote](2018_cbsoft_blockchain-crash-course.key))
+  * Tutorial Presentation part 1 ([pdf](presentations/2018_cbsoft_blockchain-crash-course.pdf) | [keynote](presentations/2018_cbsoft_blockchain-crash-course.key))
 * Hands-On Lessons (part 2)  
-  * [Hands-On: Beginners to Solidity](beginners1.md)
-  * [Hands-On: Solidity Coding Patterns](patterns1.md)
+  * [Hands-On: Beginners to Solidity](beginners1.md) ([slides pdf](presentations/solidity_handson.pdf)
+  * [Hands-On: Solidity Coding Patterns](patterns1.md) ([slides pdf](presentations/solidity_pattern.pdf)
   * [Hands-On: Pharo Tools for Smart Contract Analysis](tools1.md)
 
 ### About me.
