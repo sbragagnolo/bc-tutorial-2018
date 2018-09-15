@@ -19,7 +19,7 @@ In this page, you can find the materials for the tutorial including slides, less
   * [Hands-On: Solidity Coding Patterns](patterns1.md)
   * [Hands-On: Pharo Tools for Smart Contract Analysis](tools1.md)
 
-## About me.
+## About me
 
 I am Henrique Rocha, a Post-Doctoral researcher at Inria Lille (2017-2019). My current research is devoted to blockchain-oriented software engineering. I contributed to many open source blockchain tools from my blockchain research group at Inria (https://github.com/RMODINRIA-Blockchain). I did my Ph.D. at UFMG in the ASERG group. I also have experience as a college lecturer in private Brazilian institutions.
 * [LinkedIn](https://www.linkedin.com/in/hscrocha/)
