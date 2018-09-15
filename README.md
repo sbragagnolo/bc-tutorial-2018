@@ -13,7 +13,7 @@ In this page, you can find the materials for the tutorial including slides, less
 ### Tutorial
 
 * Slides:
-  * Tutorial Presentation part 1 ([pdf](2018_cbsoft_blockchain-crash-course.pdf))
+  * Tutorial Presentation part 1 ([pdf](2018_cbsoft_blockchain-crash-course.pdf) | [keynote](2018_cbsoft_blockchain-crash-course.key))
 * Hands-On Lessons (part 2)  
   * [Hands-On: Beginners to Solidity](beginners1.md)
   * [Hands-On: Solidity Coding Patterns](patterns1.md)
