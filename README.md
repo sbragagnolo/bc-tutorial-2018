@@ -10,7 +10,7 @@ In this context, a new research topic has been discovered: Blockchain-oriented S
 
 In this page, you can find the materials for the tutorial including slides, lessons, code, and etc.
 
-### Tutorial
+## Tutorial
 
 * Slides:
   * Tutorial Presentation part 1 ([pdf](presentations/2018_cbsoft_blockchain-crash-course.pdf) | [keynote](presentations/2018_cbsoft_blockchain-crash-course.key))
@@ -19,13 +19,13 @@ In this page, you can find the materials for the tutorial including slides, less
   * [Hands-On: Solidity Coding Patterns](patterns1.md)
   * [Hands-On: Pharo Tools for Smart Contract Analysis](tools1.md)
 
-### About me.
+## About me.
 
 I am Henrique Rocha, a Post-Doctoral researcher at Inria Lille (2017-2019). My current research is devoted to blockchain-oriented software engineering. I contributed to many open source blockchain tools from my blockchain research group at Inria (https://github.com/RMODINRIA-Blockchain). I did my Ph.D. at UFMG in the ASERG group. I also have experience as a college lecturer in private Brazilian institutions.
 * [LinkedIn](https://www.linkedin.com/in/hscrocha/)
 * [Lattes Curriculum](http://lattes.cnpq.br/5387568496741674)
 
-### Disclaimer
+## Disclaimer
 
 This is a tutorial made from my personal experiences and knowledge on the topic. The intent on this material is for personal usage. I am not responsible for any issues, problems, or etc. if my code examples are used (or misused) outside the simulation environment.
 
