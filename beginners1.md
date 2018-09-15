@@ -2,7 +2,7 @@
 
 In this material, I present some hands-on coding for coding smart contracts in Solidity. I will also explain some of the basic concepts of the Solidity language before coding.
 
-## 1. Starting out
+## 1. Starting out (15-20min)
 
 In this section, I present a very simple and gentle start to Solidity.
 
@@ -87,7 +87,7 @@ You can now have fun and execute the contract's functions. See how every functio
 
 Congratulations, you just finished your first contract and interaction with the blockchain.
 
-## 2. Basic Concepts part 1
+## 2. Basic Concepts part 1 (15-20min)
 
 If you saw Section 1, then you are probably a little more accustomed to the IDE and the platform. Now, I present some basic concepts of Solidity.
 
@@ -207,7 +207,7 @@ constructor(address a, address b) public {
 ```
 
 
-### 3.2. Predefined Variables
+### 3.2. Predefined Variables (15-20min)
 
 There are some predefined variables available to use in any contract. Usually, they provide information related to the blockchain platform. I am going to show a small list of the ones most used, for a complete list [see this](https://solidity.readthedocs.io/en/v0.4.24/units-and-global-variables.html#block-and-transaction-properties).
 * __msg__ - references the current message call (i.e., function call).
@@ -291,7 +291,7 @@ contract Restricted {
 
 You can deploy the contract using one account and use the "setData" function to modify the data. After that, change the selected account on the "account combo-box" and try calling the function again. You should see an exception in the transactions log and also the message we placed on the require.
 
-## 4. Dealing with Money (Ether)
+## 4. Dealing with Money (Ether) (20-30min)
 
 One of the major advantages of smart contracts is dealing with cryptocurrency (in Ethereum always measured in Wei). This section focused only on coding Solidity contracts that interact with Ether.
 
