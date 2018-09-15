@@ -1,6 +1,6 @@
-## Under construction.
+# Blockchain & Smart Contracts Crash Course
 
-Please wait for my presentation at CBSoft (September 17) to access this page and materials. I am still editing and trying to improve its contents.
+Tutorial presented at [CBSoft 2018](http://cbsoft2018.icmc.usp.br/). In this page, you can find the materials and practices for this tutorial.
 
 ## Introduction
 
