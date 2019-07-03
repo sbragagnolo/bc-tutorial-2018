@@ -122,7 +122,6 @@ contract CrowdFund{
         if(now >= expiration){
             if(totalraised >= minimumRequired){
                 currentState = State.Closed;
-                getFunds();
             }
             else{
                 currentState = State.Refund;
