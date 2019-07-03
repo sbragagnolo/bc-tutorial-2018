@@ -95,7 +95,7 @@ contract BondMarket {
     function cashBond(Bond b) public {
         require(b.getIssuer() == address(this));
         require(b.getOwner() == msg.sender);
-        require(b.getStartDate()+365 days == now);
+        require(b.getStartDate()+365 days <= now);
         uint face_value = b.getFaceValue();
         address(b).transfer( face_value );
         b.terminate();
