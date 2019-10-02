@@ -1,16 +1,14 @@
-pragma solidity^0.4.24;
-/**
- * @title Wallet Contract Example v1
- * @author Henrique
- **/
+pragma solidity ^0.5.1;
+
 contract MyWallet{
-    address private owner;
+    address payable private owner;
     uint8 constant private version = 1; //just to keep track of the versions
+    event PayEvent(address receiver, uint amount);
+    event DepositEvent(address sender, uint amount);
     
     constructor() public {
         owner = msg.sender;
     }
-    
     modifier onlyOwner(){
         require(owner == msg.sender);
         _;
@@ -19,17 +17,15 @@ contract MyWallet{
         require(address(this).balance >= amount);
         _;
     }
-    
     function getBalance() public view returns(uint){
         return address(this).balance;
     }
-    
-    function pay(address receiver, uint amount) public onlyOwner checkBalance(amount) {
+    function pay(address payable receiver, uint  amount) public onlyOwner checkBalance(amount) {
         receiver.transfer( amount );
+         emit PayEvent(receiver, amount);
     }
-    
     function deposit() public payable {
-        //Yes the deposit function is empty
+       emit DepositEvent(msg.sender, msg.value);
     }
     
     function withdraw(uint amount) public onlyOwner checkBalance(amount) {
